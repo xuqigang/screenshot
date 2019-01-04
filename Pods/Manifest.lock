@@ -1,0 +1,38 @@
+PODS:
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - FontAwesome (4.5.0)
+  - SVProgressHUD (2.2.5)
+  - UMengAnalytics (4.2.4)
+  - ZipArchive (1.4.0)
+  - ZYQAssetPickerController (1.2.0)
+
+DEPENDENCIES:
+  - FMDB
+  - FontAwesome
+  - SVProgressHUD
+  - UMengAnalytics
+  - ZipArchive
+  - ZYQAssetPickerController
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FMDB
+    - FontAwesome
+    - SVProgressHUD
+    - UMengAnalytics
+    - ZipArchive
+    - ZYQAssetPickerController
+
+SPEC CHECKSUMS:
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  FontAwesome: dd8c48bf965e771309d8af17c4d8579217b3e756
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
+  ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
+  ZYQAssetPickerController: dc692a6fb421c0dc0efcabd43eb260cfb073f7fd
+
+PODFILE CHECKSUM: 7cfc5b5f9bcf1046f1ef3da220b39de03dbfe003
+
+COCOAPODS: 1.5.3

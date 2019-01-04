@@ -1,0 +1,10 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/UMengAnalytics/umsdk_IOS_analyics_idfa_v4.2.4"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/FontAwesome" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/UMengAnalytics" "${PODS_ROOT}/Headers/Public/ZYQAssetPickerController" "${PODS_ROOT}/Headers/Public/ZipArchive"
+LIBRARY_SEARCH_PATHS = $(inherited) "$(PODS_ROOT)/UMengAnalytics/**" "${PODS_CONFIGURATION_BUILD_DIR}/FMDB" "${PODS_CONFIGURATION_BUILD_DIR}/FontAwesome" "${PODS_CONFIGURATION_BUILD_DIR}/SVProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/ZYQAssetPickerController" "${PODS_CONFIGURATION_BUILD_DIR}/ZipArchive"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/FMDB" -isystem "${PODS_ROOT}/Headers/Public/FontAwesome" -isystem "${PODS_ROOT}/Headers/Public/SVProgressHUD" -isystem "${PODS_ROOT}/Headers/Public/UMengAnalytics" -isystem "${PODS_ROOT}/Headers/Public/ZYQAssetPickerController" -isystem "${PODS_ROOT}/Headers/Public/ZipArchive"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"FMDB" -l"FontAwesome" -l"SVProgressHUD" -l"ZYQAssetPickerController" -l"ZipArchive" -l"sqlite3" -l"z" -framework "AssetsLibrary" -framework "CoreGraphics" -framework "CoreTelephony" -framework "Foundation" -framework "QuartzCore" -framework "UIKit" -framework "UMMobClick"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
