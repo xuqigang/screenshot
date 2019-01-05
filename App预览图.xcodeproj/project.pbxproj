@@ -10,6 +10,7 @@
 		2497DB80E56D0330B69D3F3E /* libPods-App预览图.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B219D6E92064CFFD58073742 /* libPods-App预览图.a */; };
 		7BA70F2C21DF94F900D1D1DC /* UIColor+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */; };
 		7BE67C5321E060A200CD7F81 /* ColorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C5221E060A200CD7F81 /* ColorInfo.m */; };
+		7BE67C5621E0625F00CD7F81 /* QGDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C5421E0625F00CD7F81 /* QGDBManager.m */; };
 		7BE9D2A021DEEE6F00C9C3D5 /* ScreenshotEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE9D29E21DEEE6F00C9C3D5 /* ScreenshotEditVC.m */; };
 		7BE9D2A121DEEE6F00C9C3D5 /* ScreenshotEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE9D29F21DEEE6F00C9C3D5 /* ScreenshotEditVC.xib */; };
 		7BE9D2A321DEFB0C00C9C3D5 /* 0x0ss-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BE9D2A221DEFB0C00C9C3D5 /* 0x0ss-3.jpg */; };
@@ -39,16 +40,13 @@
 		7BF4265221DD9E5A001920AA /* buzhou04.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF4260D21DD9E5A001920AA /* buzhou04.png */; };
 		7BF4265921DD9E5A001920AA /* UIView+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4261E21DD9E5A001920AA /* UIView+utils.m */; };
 		7BF4265A21DD9E5A001920AA /* UIView+frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262121DD9E5A001920AA /* UIView+frame.m */; };
-		7BF4265B21DD9E5A001920AA /* QGDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262421DD9E5A001920AA /* QGDBManager.m */; };
 		7BF4265C21DD9E5A001920AA /* AssignToObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262521DD9E5A001920AA /* AssignToObject.m */; };
 		7BF4265D21DD9E5A001920AA /* SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262621DD9E5A001920AA /* SBJson.m */; };
 		7BF4265E21DD9E5A001920AA /* UIScrollView+blankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262721DD9E5A001920AA /* UIScrollView+blankView.m */; };
 		7BF4265F21DD9E5A001920AA /* UIView+layerXib.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262921DD9E5A001920AA /* UIView+layerXib.m */; };
-		7BF4266021DD9E5A001920AA /* QGDBTableListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262A21DD9E5A001920AA /* QGDBTableListManager.m */; };
 		7BF4266121DD9E5A001920AA /* NSMutableAttributedString+AttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262B21DD9E5A001920AA /* NSMutableAttributedString+AttributedString.m */; };
 		7BF4266221DD9E5A001920AA /* UIImage+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262C21DD9E5A001920AA /* UIImage+utils.m */; };
 		7BF4266321DD9E5A001920AA /* NSString+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262D21DD9E5A001920AA /* NSString+utils.m */; };
-		7BF4266421DD9E5A001920AA /* QGFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4262F21DD9E5A001920AA /* QGFileManager.m */; };
 		7BF4266521DD9E5A001920AA /* NSDate+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4263021DD9E5A001920AA /* NSDate+utils.m */; };
 		7BF4267421DDFA2D001920AA /* ScreenshotPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4267321DDFA2D001920AA /* ScreenshotPreview.m */; };
 		7BF4267621DDFA3B001920AA /* ScreenshotPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BF4267521DDFA3B001920AA /* ScreenshotPreview.xib */; };
@@ -78,6 +76,8 @@
 		7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+utils.m"; sourceTree = "<group>"; };
 		7BE67C5121E060A200CD7F81 /* ColorInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorInfo.h; sourceTree = "<group>"; };
 		7BE67C5221E060A200CD7F81 /* ColorInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorInfo.m; sourceTree = "<group>"; };
+		7BE67C5421E0625F00CD7F81 /* QGDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGDBManager.m; sourceTree = "<group>"; };
+		7BE67C5521E0625F00CD7F81 /* QGDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGDBManager.h; sourceTree = "<group>"; };
 		7BE9D29D21DEEE6F00C9C3D5 /* ScreenshotEditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenshotEditVC.h; sourceTree = "<group>"; };
 		7BE9D29E21DEEE6F00C9C3D5 /* ScreenshotEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenshotEditVC.m; sourceTree = "<group>"; };
 		7BE9D29F21DEEE6F00C9C3D5 /* ScreenshotEditVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotEditVC.xib; sourceTree = "<group>"; };
@@ -124,26 +124,20 @@
 		7BF4260C21DD9E5A001920AA /* buzhou05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buzhou05.png; sourceTree = "<group>"; };
 		7BF4260D21DD9E5A001920AA /* buzhou04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buzhou04.png; sourceTree = "<group>"; };
 		7BF4261B21DD9E5A001920AA /* NSMutableAttributedString+AttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+AttributedString.h"; sourceTree = "<group>"; };
-		7BF4261C21DD9E5A001920AA /* QGDBTableListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGDBTableListManager.h; sourceTree = "<group>"; };
 		7BF4261D21DD9E5A001920AA /* UIView+layerXib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+layerXib.h"; sourceTree = "<group>"; };
 		7BF4261E21DD9E5A001920AA /* UIView+utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+utils.m"; sourceTree = "<group>"; };
 		7BF4261F21DD9E5A001920AA /* NSString+utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+utils.h"; sourceTree = "<group>"; };
 		7BF4262021DD9E5A001920AA /* UIImage+utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+utils.h"; sourceTree = "<group>"; };
 		7BF4262121DD9E5A001920AA /* UIView+frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+frame.m"; sourceTree = "<group>"; };
-		7BF4262221DD9E5A001920AA /* QGFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGFileManager.h; sourceTree = "<group>"; };
 		7BF4262321DD9E5A001920AA /* NSDate+utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+utils.h"; sourceTree = "<group>"; };
-		7BF4262421DD9E5A001920AA /* QGDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGDBManager.m; sourceTree = "<group>"; };
 		7BF4262521DD9E5A001920AA /* AssignToObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignToObject.m; sourceTree = "<group>"; };
 		7BF4262621DD9E5A001920AA /* SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson.m; sourceTree = "<group>"; };
 		7BF4262721DD9E5A001920AA /* UIScrollView+blankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+blankView.m"; sourceTree = "<group>"; };
 		7BF4262821DD9E5A001920AA /* UIView+utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+utils.h"; sourceTree = "<group>"; };
 		7BF4262921DD9E5A001920AA /* UIView+layerXib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+layerXib.m"; sourceTree = "<group>"; };
-		7BF4262A21DD9E5A001920AA /* QGDBTableListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGDBTableListManager.m; sourceTree = "<group>"; };
 		7BF4262B21DD9E5A001920AA /* NSMutableAttributedString+AttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+AttributedString.m"; sourceTree = "<group>"; };
 		7BF4262C21DD9E5A001920AA /* UIImage+utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+utils.m"; sourceTree = "<group>"; };
 		7BF4262D21DD9E5A001920AA /* NSString+utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+utils.m"; sourceTree = "<group>"; };
-		7BF4262E21DD9E5A001920AA /* QGDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGDBManager.h; sourceTree = "<group>"; };
-		7BF4262F21DD9E5A001920AA /* QGFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGFileManager.m; sourceTree = "<group>"; };
 		7BF4263021DD9E5A001920AA /* NSDate+utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+utils.m"; sourceTree = "<group>"; };
 		7BF4263121DD9E5A001920AA /* UIView+frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+frame.h"; sourceTree = "<group>"; };
 		7BF4263221DD9E5A001920AA /* UIScrollView+blankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+blankView.h"; sourceTree = "<group>"; };
@@ -287,6 +281,8 @@
 		7BF425DF21DD9E59001920AA /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				7BE67C5521E0625F00CD7F81 /* QGDBManager.h */,
+				7BE67C5421E0625F00CD7F81 /* QGDBManager.m */,
 				7BF425E021DD9E59001920AA /* FontAwesome */,
 			);
 			path = Lib;
@@ -345,12 +341,6 @@
 				7BF4262D21DD9E5A001920AA /* NSString+utils.m */,
 				7BA70F2A21DF94F900D1D1DC /* UIColor+utils.h */,
 				7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */,
-				7BF4262E21DD9E5A001920AA /* QGDBManager.h */,
-				7BF4262421DD9E5A001920AA /* QGDBManager.m */,
-				7BF4261C21DD9E5A001920AA /* QGDBTableListManager.h */,
-				7BF4262A21DD9E5A001920AA /* QGDBTableListManager.m */,
-				7BF4262221DD9E5A001920AA /* QGFileManager.h */,
-				7BF4262F21DD9E5A001920AA /* QGFileManager.m */,
 				7BF4263321DD9E5A001920AA /* SBJson.h */,
 				7BF4262621DD9E5A001920AA /* SBJson.m */,
 				7BF4262021DD9E5A001920AA /* UIImage+utils.h */,
@@ -645,9 +635,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BF4266021DD9E5A001920AA /* QGDBTableListManager.m in Sources */,
 				7BF4265C21DD9E5A001920AA /* AssignToObject.m in Sources */,
-				7BF4265B21DD9E5A001920AA /* QGDBManager.m in Sources */,
 				7BF4263621DD9E5A001920AA /* XMBaseNC.m in Sources */,
 				7BF4263921DD9E5A001920AA /* XMBaseView.m in Sources */,
 				7BF4266321DD9E5A001920AA /* NSString+utils.m in Sources */,
@@ -668,8 +656,8 @@
 				7BE9D2A621DEFE2500C9C3D5 /* ScreenshotMenuView.m in Sources */,
 				7BF4267D21DDFFE3001920AA /* ScreenshotParameter.m in Sources */,
 				7BF425AA21DD9DD7001920AA /* AppDelegate.m in Sources */,
-				7BF4266421DD9E5A001920AA /* QGFileManager.m in Sources */,
 				7BF4268321DE0B50001920AA /* UIView+Additions.m in Sources */,
+				7BE67C5621E0625F00CD7F81 /* QGDBManager.m in Sources */,
 				7BF4265A21DD9E5A001920AA /* UIView+frame.m in Sources */,
 				7BF4268921DE0DAF001920AA /* ScreenshotTextFiled.m in Sources */,
 				7BF4268F21DE14DB001920AA /* HomeVC.m in Sources */,

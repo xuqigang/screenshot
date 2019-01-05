@@ -30,7 +30,6 @@
 #import "UIView+utils.h"
 #import "NSMutableAttributedString+AttributedString.h"
 #import "NSMutableAttributedString+FontAwesome.h"
-#import "QGFileManager.h"
 #import "AppConfig.h"
 #import "SVProgressHUD.h"
 

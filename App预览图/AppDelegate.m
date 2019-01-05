@@ -10,7 +10,7 @@
 #import "HomeVC.h"
 #import "XMBaseNC.h"
 #import "UIColor+utils.h"
-#import "QG"
+#import "QGDBManager.h"
 @interface AppDelegate ()
 
 @end
@@ -19,6 +19,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[QGDBManager defaultManager] registerTableClass:@[@"ColorInfo"] result:^(NSDictionary *response) {
+        NSLog(@"%@",response);
+    }];
     // Override point for customization after application launch.
     HomeVC *vc = [HomeVC instanceFromNib];
     XMBaseNC * nv = [[XMBaseNC alloc] initWithRootViewController:vc];

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger red;
 @property (nonatomic, assign) NSInteger green;
 @property (nonatomic, assign) NSInteger blue;
-@property (nonatomic, assign) NSInteger opacity;
+@property (nonatomic, assign) CGFloat opacity;
 
 @end
 

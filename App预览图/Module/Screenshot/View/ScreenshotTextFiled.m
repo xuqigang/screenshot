@@ -17,7 +17,7 @@
     UIButton*       _deleteBtn;                 //删除铵钮
     UIButton*       _styleBtn;                  //样式操作按钮，目前只改字体颜色
     UIButton*       _scaleRotateBtn;            //单手操作放大，旋转按钮
-    
+    UILabel*        _rotateAngleLabel;            //旋转角度
     //自字义键盘上的输入显示
     UITextView*     _inputTextView;
     UIButton*       _inputConfirmBtn;
@@ -65,7 +65,7 @@
         _textLabel.text = @"请输入文字";
         _textLabel.textColor = UIColor.blackColor;
         _textLabel.shadowOffset = CGSizeMake(2, 2);
-        _textLabel.font = [UIFont systemFontOfSize:18];
+        _textLabel.font = [UIFont systemFontOfSize:16];
         _textLabel.numberOfLines = 0;
         _textLabel.textAlignment = NSTextAlignmentCenter;
         UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
@@ -75,6 +75,13 @@
         [_textLabel addGestureRecognizer:singleTap];
         [_borderView  addSubview:_textLabel];
     
+        _rotateAngleLabel = [UILabel new];
+        _rotateAngleLabel.text = @"0";
+        _rotateAngleLabel.textColor = UIColor.blackColor;
+        _rotateAngleLabel.font = [UIFont systemFontOfSize:14];
+        _rotateAngleLabel.numberOfLines = 1;
+        _rotateAngleLabel.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:_rotateAngleLabel];
         
         _deleteBtn = [UIButton new];
         [_deleteBtn setImage:[UIImage imageNamed:@"videotext_delete"] forState:UIControlStateNormal];
@@ -95,22 +102,22 @@
         UIView* inputAccessoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
         
         UIView* labelBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, inputAccessoryView.width - 40, inputAccessoryView.height)];
-        labelBgView.backgroundColor = UIColor.whiteColor;
+        labelBgView.backgroundColor = UIColor.darkGrayColor;
         labelBgView.alpha = 0.5;
         [inputAccessoryView addSubview:labelBgView];
         
-        _inputTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, inputAccessoryView.width - 50, inputAccessoryView.height)];
-        _inputTextView.textColor = UIColorFromRGB(0xFFFFFF);
-        _inputTextView.font = [UIFont systemFontOfSize:18];
+        _inputTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, inputAccessoryView.width - 70, inputAccessoryView.height)];
+        _inputTextView.textColor = UIColorFromRGB(0x434343);
+        _inputTextView.font = [UIFont systemFontOfSize:16];
         _inputTextView.textAlignment = NSTextAlignmentLeft;
         _inputTextView.delegate = self;
         _inputTextView.editable = YES;
         _inputTextView.backgroundColor = UIColor.clearColor;
         [inputAccessoryView addSubview:_inputTextView];
         
-        _inputConfirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(_inputTextView.right, 0, 40, inputAccessoryView.height)];
+        _inputConfirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(_inputTextView.right, 0, 60, inputAccessoryView.height)];
+        [_inputConfirmBtn setTitle:@"确定" forState:UIControlStateNormal];
         _inputConfirmBtn.backgroundColor = UIColorFromRGB(0x0accac);
-        [_inputConfirmBtn setImage:[UIImage imageNamed:@"videotext_confirm"] forState:UIControlStateNormal];
         [_inputConfirmBtn addTarget:self action:@selector(onInputConfirmBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [inputAccessoryView addSubview:_inputConfirmBtn];
         
@@ -169,6 +176,8 @@
     _deleteBtn.center = CGPointMake(_borderView.x, _borderView.y);
     _deleteBtn.bounds = CGRectMake(0, 0, 50, 50);
     
+    _rotateAngleLabel.center = CGPointMake(_borderView.x, _borderView.bottom);
+    _rotateAngleLabel.bounds = CGRectMake(0, 0, 50, 50);
     _styleBtn.center = CGPointMake(_borderView.right, _borderView.top);
     _styleBtn.bounds = CGRectMake(0, 0, 50, 50);
     
@@ -352,6 +361,7 @@
             
             self.transform = CGAffineTransformRotate(self.transform, angle);
             _rotateAngle += angle;
+            _rotateAngleLabel.text = [NSString stringWithFormat:@"%.0lf°",_rotateAngle * (180.0 / M_PI)];
         }
         [recognizer setTranslation:CGPointZero inView:self];
     }

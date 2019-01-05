@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ColorInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
-typedef void(^ColorSelectedViewResultCallBack)(UIColor*color ,NSString* hexColorString);
+typedef void(^ColorSelectedViewResultCallBack)(ColorInfo*color ,NSString* hexColorString);
 @interface ColorSelectedView : UIView
 
 + (instancetype)defaultView;

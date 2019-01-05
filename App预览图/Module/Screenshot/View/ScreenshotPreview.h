@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ScreenshotPreview : UIView
 
-@property (nonatomic, strong) UIImage *backgroundImage;
-@property (nonatomic, strong) UIImage *shellImage;
+@property (nonatomic, strong) UIImage * _Nullable backgroundImage;
+@property (nonatomic, strong) UIImage * _Nullable shellImage;
 
 @end
 

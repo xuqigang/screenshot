@@ -8,8 +8,11 @@
 
 #import "ColorSelectedView.h"
 #import "UIColor+utils.h"
-@interface ColorSelectedView ()
-
+#import "QGDBManager.h"
+@interface ColorSelectedView ()<UICollectionViewDelegate,UICollectionViewDataSource>
+{
+    NSInteger _maxColorNumber;
+}
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (nonatomic, strong) ColorSelectedViewResultCallBack resultCallBack;
 @property (weak, nonatomic) IBOutlet UISlider *redslider;
@@ -22,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *blueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *opacityTextField;
 @property (weak, nonatomic) IBOutlet UITextField *hexTextField;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) NSMutableArray<ColorInfo*> *colorDataSource;
 
 @end
 @implementation ColorSelectedView
@@ -44,11 +49,20 @@
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
     effectView.tag = 1001;
     [self.contentView insertSubview:effectView atIndex:0];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
     UIView *effectView = [self.contentView viewWithTag:1001];
     effectView.frame = self.contentView.bounds;
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout;
+    flowLayout.itemSize = CGSizeMake(self.collectionView.frame.size.height / 2.0 - 2, self.collectionView.frame.size.height / 2.0 - 2);
+    flowLayout.minimumInteritemSpacing = 6;
+    flowLayout.minimumLineSpacing = 4;
+    
+    _maxColorNumber = self.collectionView.frame.size.width / (self.collectionView.frame.size.height / 2.0 + 4) * 2;
 }
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -57,6 +71,34 @@
     // Drawing code
 }
 */
+#pragma mark - UICollectionViewDelegate
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [self.colorDataSource count];
+}
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
+    cell.borderWidth = 1;
+    cell.borderColor = [UIColor whiteColor];
+    if (self.colorDataSource.count > indexPath.row) {
+        ColorInfo *info = [self.colorDataSource objectAtIndex:indexPath.row];
+        UIColor *color = [UIColor colorWithRed:info.red/255.0 green:info.green/255.0 blue:info.blue/255.0 alpha:info.opacity];
+        cell.contentView.backgroundColor = color;
+    } else{
+        cell.contentView.backgroundColor = [UIColor redColor];
+    }
+    return cell;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row < [self.colorDataSource count]) {
+        ColorInfo *info = [self.colorDataSource objectAtIndex:indexPath.row];
+        if (_resultCallBack) {
+            _resultCallBack(info,[UIColor convertRGBToHexStringWithRed:info.red green:info.green blue:info.blue]);
+        }
+    }
+    [self hiddenView];
+}
 
 #pragma mark - 点击
 
@@ -64,8 +106,32 @@
     [self hiddenView];
 }
 - (IBAction)enterButtonClicked:(UIButton *)sender {
+    ColorInfo *colorInfo = [ColorInfo new];
+    colorInfo.red = (NSInteger)self.redslider.value;
+    colorInfo.green = (NSInteger)self.greenslider.value;
+    colorInfo.blue = (NSInteger)self.blueslider.value;
+    colorInfo.opacity = self.opacityslider.value;
     if (_resultCallBack) {
-        _resultCallBack(self.colorPreview.backgroundColor,self.hexTextField.text);
+        _resultCallBack(colorInfo,self.hexTextField.text);
+    }
+    BOOL flag = [[QGDBManager defaultManager] existData:colorInfo];
+    if (flag == NO) {
+        if ([self.colorDataSource count] >= _maxColorNumber) {
+            ColorInfo *firstColorInfo = [self.colorDataSource firstObject];
+            [[QGDBManager defaultManager] deleteData:firstColorInfo result:^(BOOL flag) {
+                [self.colorDataSource removeObjectAtIndex:0];
+                [self.collectionView reloadData];
+                [[QGDBManager defaultManager] insertData:colorInfo result:^(BOOL flag) {
+                    
+                }];
+            }];
+        } else {
+            [[QGDBManager defaultManager] insertData:colorInfo result:^(BOOL flag) {
+                
+            }];
+        }
+        
+        
     }
     [self hiddenView];
 }
@@ -77,7 +143,7 @@
     self.hexTextField.text = [UIColor convertRGBToHexStringWithRed:self.redslider.value green:self.greenslider.value blue:self.blueslider.value];
 }
 - (IBAction)opacitySlider:(UISlider *)sender {
-    self.opacityTextField.text = [NSString stringWithFormat:@"%.0f\%",sender.value * 100];
+    self.opacityTextField.text = [NSString stringWithFormat:@"%2f",sender.value];
     [self updateColorPreview];
 }
 
@@ -85,10 +151,15 @@
     UIColor *color = [UIColor colorWithRed:self.redslider.value/255.0 green:self.greenslider.value/255.0 blue:self.blueslider.value/255.0 alpha:self.opacityslider.value];
     self.colorPreview.backgroundColor = color;
 }
-- (void)showInView:(UIView*)view result:(void(^)(UIColor*color ,NSString* hexColorString)) result{
+- (void)showInView:(UIView*)view result:(void(^)(ColorInfo *color ,NSString* hexColorString)) result{
     self.resultCallBack = result;
     self.frame = view.bounds;
     [self layoutIfNeeded];
+    ColorInfo *colorInfo = [ColorInfo new];
+    [[QGDBManager defaultManager] selectData:colorInfo result:^(NSMutableArray *resultSet) {
+        self.colorDataSource = resultSet;
+        [self.collectionView reloadData];
+    }];
     [self updateColorPreview];
     if (view) {
         [view addSubview:self];

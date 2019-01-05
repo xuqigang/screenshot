@@ -7,39 +7,83 @@
 //
 
 #import "QGDBManager.h"
+#import "FMDB.h"
 #import <objc/runtime.h>
-#define DATABASEPATH [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Diary/DB"]
-
-static QGDBManager *fmdbManager = nil;
-
 @interface QGDBManager ()
 {
 
     FMDatabaseQueue *_dbQueue;
+    FMDatabase *_db;
    
 }
 @end
 
 @implementation QGDBManager
-+ (instancetype)shareManager{
-    
++ (instancetype)defaultManager{
+    static QGDBManager *fmdbManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         fmdbManager = [[QGDBManager alloc] init];
     });
     return fmdbManager;
 }
-+ (void)reloadDB{
-    fmdbManager = [[QGDBManager alloc] init];
-}
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         [self initDataBase];
-        [self initDBTable];
     }
     return self;
+}
+
+- (void)registerTableClass:(NSArray<NSString*>*)objects result:(void (^)(NSDictionary* response))result{
+    [_dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        self->_db = db;
+        NSMutableArray *results = [NSMutableArray arrayWithCapacity:10];
+        [objects enumerateObjectsUsingBlock:^(NSString *tableName, NSUInteger idx, BOOL * _Nonnull stop) {
+            Class className = NSClassFromString(tableName);
+            if (className) {
+                //将类名作为表名，创建数据库表
+                NSString *sql = [NSString stringWithFormat:@"SELECT COUNT(*) as count FROM sqlite_master where type='table' and name='%@';",tableName];;
+                FMResultSet *set = [db executeQuery:sql];
+                BOOL isExistTable = NO;
+                while ([set next])
+                {
+                    // just print out what we've got in a number of formats.
+                    NSInteger count = [set intForColumn:@"count"];
+                    if (count != 0)
+                    {
+                        NSLog(@"%@ isTableOK", tableName);
+                        isExistTable = YES;
+                        [set close]; //关闭结果集
+                        NSString *msg = [NSString stringWithFormat:@"table %@ already exist",tableName];
+                        [results addObject:msg];
+                        break;
+                    }
+                }
+                
+                //如果不存在，则创建对应数据库表
+                if (isExistTable == NO) {
+                    BOOL flag = [self createTable:tableName dataBase:db];
+                    if (flag) {
+                        NSString *msg = [NSString stringWithFormat:@"table %@ created success",tableName];
+                        [results addObject:msg];
+                    } else {
+                        NSString *msg = [NSString stringWithFormat:@"table %@ created fail",tableName];
+                        [results addObject:msg];
+                    }
+                }
+            } else {
+                NSString *msg = [NSString stringWithFormat:@"Invalid class %@",className];
+                [results addObject:msg];
+            }
+            
+        }];
+        if (result) {
+            result(@{@"code":@"1",@"msg":results});
+        }
+    }];
 }
 
 - (void)initDataBase{
@@ -59,45 +103,17 @@ static QGDBManager *fmdbManager = nil;
             
         }
     }
-    _dbQueue = [FMDatabaseQueue databaseQueueWithPath:[DATABASEPATH stringByAppendingString:@"/diary.sqlite3"]];
+    _dbQueue = [FMDatabaseQueue databaseQueueWithPath:[DATABASEPATH stringByAppendingPathComponent:DATABASEName]];
 }
-- (void)initDBTable{
-    NSArray<NSString*> *tableNameList = [QGDBTableListManager tableList];
-    for (NSString *tableName in tableNameList) {
-        [_dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT COUNT(*) as count FROM sqlite_master where type='table' and name='%@';",tableName];;
-            FMResultSet *set = [db executeQuery:sql];
-            BOOL isExistTable = NO;
-            while ([set next])
-            {
-                // just print out what we've got in a number of formats.
-                NSInteger count = [set intForColumn:@"count"];
-                
-                if (count != 0)
-                {
-                    NSLog(@"%@ isTableOK", tableName);
-                    isExistTable = YES;
-                    [set close]; //关闭结果集
-                    break;
-                }
-            }
-            if (isExistTable == NO) {
-                [self createTable:tableName dataBase:db];
-            }
-        }];
-    }
-}
-- (void)createTable:(NSString*)tableName dataBase:(FMDatabase*)db{
+
+- (BOOL)createTable:(NSString*)tableName dataBase:(FMDatabase*)db{
     Class modelClass = NSClassFromString(tableName);
     if (modelClass) {
         unsigned int propertyCount = 0;
         objc_property_t *propertys = class_copyPropertyList(modelClass, &propertyCount);
-        NSMutableString *sql = [NSMutableString stringWithFormat:@"CREATE TABLE '%@' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ",tableName];
+        NSMutableString *sql = [NSMutableString stringWithFormat:@"CREATE TABLE '%@' ('QG_Identifier' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ",tableName];
         for(NSUInteger i = 0; i < propertyCount; i ++){
             NSString *propertyName = [NSString stringWithCString:property_getName(propertys[i]) encoding:NSUTF8StringEncoding];
-            if ([propertyName isEqualToString:@"id"]) {
-                continue;
-            }
             NSString *typeString = [self getSqliteDataTypeForProperty:propertys[i]];
             [sql appendFormat:@",'%@' %@",propertyName,typeString];
         }
@@ -105,19 +121,77 @@ static QGDBManager *fmdbManager = nil;
         NSInteger flag = [db executeUpdate:sql];
         if (flag > 0) {
             NSLog(@"%@ table isCreated success !", tableName);
+            return YES;
         } else {
             NSLog(@"%@ table isCreated failure !", tableName);
+            return NO;
         }
     } else {
         NSLog(@"无法找到对应的类,创建%@表失败!",tableName);
+        return NO;
     }
 }
-
+- (NSMutableArray *)selectData:(id)data{
+    Class dataClass = [data class];
+    NSString *tableName = NSStringFromClass(dataClass);
+    unsigned int propertyCount = 0;
+    objc_property_t *propertys = class_copyPropertyList(dataClass, &propertyCount);
+    NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT * FROM %@ WHERE ",tableName];
+    NSMutableArray *pragramers = [NSMutableArray arrayWithCapacity:20];
+    for (NSInteger i = 0; i < propertyCount; i ++) {
+        NSString *propertyName = [NSString stringWithCString:property_getName(propertys[i]) encoding:NSUTF8StringEncoding];
+        id value = [data valueForKey:propertyName];
+        if (value) {
+            if ([value isKindOfClass:[NSNumber class]]) {
+                if (strcmp([value objCType], @encode(NSInteger)) == 0) {
+                    NSInteger intValue = [value integerValue];
+                    if (intValue != 0) {
+                        [sql appendFormat:@"%@ = ? and ",propertyName];
+                        [pragramers addObject:value];
+                    }
+                } else {
+                    CGFloat intValue = [value floatValue];
+                    if (intValue != 0) {
+                        [sql appendFormat:@"%@ = ? and ",propertyName];
+                        [pragramers addObject:value];
+                    }
+                }
+            } else {
+                [sql appendFormat:@"%@ = ? and ",propertyName];
+                [pragramers addObject:value];
+            }
+            
+            //                NSLog(@"%@ %@",propertyName, value);
+        } else {
+            //                NSLog(@"%@ %@",propertyName, value);
+        }
+    }
+    if([sql hasSuffix:@"and "]){
+        [sql deleteCharactersInRange:NSMakeRange(sql.length - 4, 4)];
+    }
+    
+    if (pragramers.count == 0) {
+        
+        if([sql hasSuffix:@"WHERE "]){
+            [sql deleteCharactersInRange:NSMakeRange(sql.length - 6, 6)];
+        }
+        
+    }
+    NSMutableArray *resultModels = [NSMutableArray arrayWithCapacity:1];
+    FMResultSet *resultSet = [_db executeQuery:sql withArgumentsInArray:pragramers];
+    while ([resultSet next]) {
+        id model = [[dataClass alloc] init];
+        [model setValuesForKeysWithDictionary:[resultSet resultDictionary]];
+        [resultModels addObject:model];
+    }
+    return resultModels;
+}
 - (void)selectData:(id)data result:(void (^)(NSMutableArray *resultSet))result{
     [_dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
-        NSString *tableName = NSStringFromClass([data class]);
+        Class dataClass = [data class];
+        NSString *tableName = NSStringFromClass(dataClass);
         unsigned int propertyCount = 0;
-        objc_property_t *propertys = class_copyPropertyList([data class], &propertyCount);
+        objc_property_t *propertys = class_copyPropertyList(dataClass, &propertyCount);
         NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT * FROM %@ WHERE ",tableName];
         NSMutableArray *pragramers = [NSMutableArray arrayWithCapacity:20];
         for (NSInteger i = 0; i < propertyCount; i ++) {
@@ -148,9 +222,9 @@ static QGDBManager *fmdbManager = nil;
                     [pragramers addObject:value];
                 }
                 
-                NSLog(@"%@ %@",propertyName, value);
+//                NSLog(@"%@ %@",propertyName, value);
             } else {
-                NSLog(@"%@ %@",propertyName, value);
+//                NSLog(@"%@ %@",propertyName, value);
             }
         }
         if([sql hasSuffix:@"and "]){
@@ -165,9 +239,13 @@ static QGDBManager *fmdbManager = nil;
             
         }
         NSMutableArray *resultModels = [NSMutableArray arrayWithCapacity:1];
+        
+        
         FMResultSet *resultSet = [db executeQuery:sql withArgumentsInArray:pragramers];
         while ([resultSet next]) {
-            [resultModels addObject:[resultSet resultDictionary]];
+            id model = [[dataClass alloc] init];
+            [model setValuesForKeysWithDictionary:[resultSet resultDictionary]];
+            [resultModels addObject:model];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -180,29 +258,25 @@ static QGDBManager *fmdbManager = nil;
     }];
 }
 
-//升序结果
-- (void)selectData:(id)data orderBy:(NSString*)rowName ascResult:(void (^)(NSMutableArray *resultSet))result{
+- (void)existData:(id)condition result:(void (^)(BOOL isExist))result{
     [_dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
-        NSString *tableName = NSStringFromClass([data class]);
+        Class dataClass = [condition class];
+        NSString *tableName = NSStringFromClass(dataClass);
         unsigned int propertyCount = 0;
-        objc_property_t *propertys = class_copyPropertyList([data class], &propertyCount);
+        objc_property_t *propertys = class_copyPropertyList(dataClass, &propertyCount);
         NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT * FROM %@ WHERE ",tableName];
         NSMutableArray *pragramers = [NSMutableArray arrayWithCapacity:20];
         for (NSInteger i = 0; i < propertyCount; i ++) {
             NSString *propertyName = [NSString stringWithCString:property_getName(propertys[i]) encoding:NSUTF8StringEncoding];
-            id value = [data valueForKey:propertyName];
-            NSLog(@"%@",value);
+            id value = [condition valueForKey:propertyName];
             if (value) {
-                
                 if ([value isKindOfClass:[NSNumber class]]) {
                     if (strcmp([value objCType], @encode(NSInteger)) == 0) {
-                        
                         NSInteger intValue = [value integerValue];
                         if (intValue != 0) {
                             [sql appendFormat:@"%@ = ? and ",propertyName];
                             [pragramers addObject:value];
                         }
-                        
                     } else {
                         CGFloat intValue = [value floatValue];
                         if (intValue != 0) {
@@ -210,115 +284,86 @@ static QGDBManager *fmdbManager = nil;
                             [pragramers addObject:value];
                         }
                     }
-                    
                 } else {
                     [sql appendFormat:@"%@ = ? and ",propertyName];
                     [pragramers addObject:value];
                 }
                 
-                NSLog(@"%@ %@",propertyName, value);
+                //                NSLog(@"%@ %@",propertyName, value);
             } else {
-                NSLog(@"%@ %@",propertyName, value);
+                //                NSLog(@"%@ %@",propertyName, value);
             }
         }
         if([sql hasSuffix:@"and "]){
             [sql deleteCharactersInRange:NSMakeRange(sql.length - 4, 4)];
         }
-        
         if (pragramers.count == 0) {
-            
-            if([sql hasSuffix:@"WHERE "]){
-                [sql deleteCharactersInRange:NSMakeRange(sql.length - 6, 6)];
+            result(NO);
+        } else {
+            [sql appendFormat:@"limit 1"];
+            FMResultSet *resultSet = [db executeQuery:sql withArgumentsInArray:pragramers];
+            if (resultSet && result) {
+                result([resultSet next]);
+            } else if(result) {
+                result(NO);
             }
-            
         }
-        
-        [sql appendFormat:@" order by %@ asc",rowName];
-        NSMutableArray *resultModels = [NSMutableArray arrayWithCapacity:1];
-        FMResultSet *resultSet = [db executeQuery:sql withArgumentsInArray:pragramers];
-        while ([resultSet next]) {
-            [resultModels addObject:[resultSet resultDictionary]];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (result) {
-                result(resultModels);
-            }
-        });
-        
-        
     }];
 }
-//降序结果
-- (void)selectData:(id)data orderBy:(NSString*)rowName descResult:(void (^)(NSMutableArray *resultSet))result{
-    [_dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
-        NSString *tableName = NSStringFromClass([data class]);
-        unsigned int propertyCount = 0;
-        objc_property_t *propertys = class_copyPropertyList([data class], &propertyCount);
-        NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT * FROM %@ WHERE ",tableName];
-        NSMutableArray *pragramers = [NSMutableArray arrayWithCapacity:20];
-        for (NSInteger i = 0; i < propertyCount; i ++) {
-            NSString *propertyName = [NSString stringWithCString:property_getName(propertys[i]) encoding:NSUTF8StringEncoding];
-            id value = [data valueForKey:propertyName];
-            NSLog(@"%@",value);
-            if (value) {
-                
-                if ([value isKindOfClass:[NSNumber class]]) {
-                    if (strcmp([value objCType], @encode(NSInteger)) == 0) {
-                        
-                        NSInteger intValue = [value integerValue];
-                        if (intValue != 0) {
-                            [sql appendFormat:@"%@ = ? and ",propertyName];
-                            [pragramers addObject:value];
-                        }
-                        
-                    } else {
-                        CGFloat intValue = [value floatValue];
-                        if (intValue != 0) {
-                            [sql appendFormat:@"%@ = ? and ",propertyName];
-                            [pragramers addObject:value];
-                        }
+- (BOOL)existData:(id)condition{
+    Class dataClass = [condition class];
+    NSString *tableName = NSStringFromClass(dataClass);
+    unsigned int propertyCount = 0;
+    objc_property_t *propertys = class_copyPropertyList(dataClass, &propertyCount);
+    NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT * FROM %@ WHERE ",tableName];
+    NSMutableArray *pragramers = [NSMutableArray arrayWithCapacity:20];
+    for (NSInteger i = 0; i < propertyCount; i ++) {
+        NSString *propertyName = [NSString stringWithCString:property_getName(propertys[i]) encoding:NSUTF8StringEncoding];
+        id value = [condition valueForKey:propertyName];
+        if (value) {
+            if ([value isKindOfClass:[NSNumber class]]) {
+                if (strcmp([value objCType], @encode(NSInteger)) == 0) {
+                    NSInteger intValue = [value integerValue];
+                    if (intValue != 0) {
+                        [sql appendFormat:@"%@ = ? and ",propertyName];
+                        [pragramers addObject:value];
                     }
-                    
                 } else {
-                    [sql appendFormat:@"%@ = ? and ",propertyName];
-                    [pragramers addObject:value];
+                    CGFloat intValue = [value floatValue];
+                    if (intValue != 0) {
+                        [sql appendFormat:@"%@ = ? and ",propertyName];
+                        [pragramers addObject:value];
+                    }
                 }
-                
-                NSLog(@"%@ %@",propertyName, value);
             } else {
-                NSLog(@"%@ %@",propertyName, value);
-            }
-        }
-        if([sql hasSuffix:@"and "]){
-            [sql deleteCharactersInRange:NSMakeRange(sql.length - 4, 4)];
-        }
-        
-        if (pragramers.count == 0) {
-            
-            if([sql hasSuffix:@"WHERE "]){
-                [sql deleteCharactersInRange:NSMakeRange(sql.length - 6, 6)];
+                [sql appendFormat:@"%@ = ? and ",propertyName];
+                [pragramers addObject:value];
             }
             
+            //                NSLog(@"%@ %@",propertyName, value);
+        } else {
+            //                NSLog(@"%@ %@",propertyName, value);
         }
+    }
+    if([sql hasSuffix:@"and "]){
+        [sql deleteCharactersInRange:NSMakeRange(sql.length - 4, 4)];
+    }
+    
+    if (pragramers.count == 0) {
         
-        [sql appendFormat:@" order by %@ desc",rowName];
-        NSMutableArray *resultModels = [NSMutableArray arrayWithCapacity:1];
-        FMResultSet *resultSet = [db executeQuery:sql withArgumentsInArray:pragramers];
-        while ([resultSet next]) {
-            [resultModels addObject:[resultSet resultDictionary]];
+        return NO;
+        
+    } else {
+        [sql appendFormat:@"limit 1"];
+        FMResultSet *resultSet = [_db executeQuery:sql withArgumentsInArray:pragramers];
+        if (resultSet) {
+            return [resultSet next];
+        } else {
+            return NO;
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (result) {
-                result(resultModels);
-            }
-        });
-        
-        
-    }];
+    }
+    
 }
-
 - (void)insertData:(id)data result:(void (^)(BOOL flag))result{
     
     [_dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
@@ -330,16 +375,13 @@ static QGDBManager *fmdbManager = nil;
         NSMutableArray *pragramers = [NSMutableArray arrayWithCapacity:propertyCount];
         for (NSInteger i = 0; i < propertyCount; i ++) {
             NSString *propertyName = [NSString stringWithCString:property_getName(propertys[i]) encoding:NSUTF8StringEncoding];
-            if ([propertyName isEqualToString:@"id"]) {
-                continue;
-            }
             [sqlTab appendFormat:@"'%@',",propertyName];
             [sqlPra appendString:@"?,"];
             id value = [data valueForKey:propertyName];
             if (value) {
                 [pragramers addObject:value];
             } else {
-                [pragramers addObject:[NSNull null]];
+                [pragramers addObject:@""];
             }
         }
         if ([sqlTab hasSuffix:@","]) {
@@ -359,6 +401,60 @@ static QGDBManager *fmdbManager = nil;
         });
     }];
     return ;
+}
+- (void)updateData:(id)data condition:(NSDictionary*)condition result:(void (^)(BOOL flag))result{
+    [_dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        
+        if(condition == nil || [[condition allKeys] count] == 0){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (result) {
+                    result(NO);
+                }
+            });
+            return ;
+        }
+        
+        NSString *tableName = NSStringFromClass([data class]);
+        unsigned int propertyCount = 0;
+        objc_property_t *propertys = class_copyPropertyList([data class], &propertyCount);
+        NSMutableString *sql = [NSMutableString stringWithFormat:@"UPDATE '%@' SET ",tableName];
+        NSMutableArray *pragramers = [NSMutableArray arrayWithCapacity:propertyCount];
+        
+        id valueId ;
+        for (NSInteger i = 0; i < propertyCount; i ++) {
+            NSString *propertyName = [NSString stringWithCString:property_getName(propertys[i]) encoding:NSUTF8StringEncoding];
+            if ([propertyName isEqualToString:@"id"]) {
+                valueId = [data valueForKey:propertyName];
+                continue;
+            } else if([data valueForKey:propertyName]){
+                [sql appendFormat:@"%@ = ? ,",propertyName];
+                [pragramers addObject:[data valueForKey:propertyName]];
+            }
+            
+        }
+        if (valueId == nil) {
+            NSLog(@"id 不能为空");
+            return;
+        }
+        if ([sql hasSuffix:@","]) {
+            [sql deleteCharactersInRange:NSMakeRange(sql.length - 1, 1)];
+        }
+        NSMutableString *conditionStr = [[NSMutableString alloc] initWithCapacity:10];
+        [condition enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [conditionStr appendFormat:@"%@ = ? and ",key];
+            [pragramers addObject:obj];
+        }];
+        if ([conditionStr hasSuffix:@"and "]) {
+            [conditionStr deleteCharactersInRange:NSMakeRange(conditionStr.length - 4, 4)];
+        }
+        [sql appendFormat:@"WHERE %@",conditionStr];
+        BOOL flag = [db executeUpdate:sql withArgumentsInArray:pragramers];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (result) {
+                result(flag);
+            }
+        });
+    }];
 }
 - (void)updateData:(id)data result:(void (^)(BOOL flag))result{
     [_dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
@@ -471,17 +567,14 @@ static QGDBManager *fmdbManager = nil;
     const char * rawPropertyType = [propertyType UTF8String];
     
     if ([propertyType isEqualToString:@"@\"NSDate\""]) {
-        return @"TIMESTAMP";
+        return @"DATETIME";
     } else if([propertyType isEqualToString:@"@\"NSString\""]){
         return @"TEXT";
     } else {
         if (strcmp(rawPropertyType, @encode(CGFloat)) == 0) {
             //it's a float
             return @"FLOAT";
-        }else if (strcmp(rawPropertyType, @encode(NSTimeInterval)) == 0) {
-            return @"DOUBLE";
-            //it's an int
-        }else if (strcmp(rawPropertyType, @encode(NSInteger)) == 0) {
+        } else if (strcmp(rawPropertyType, @encode(NSInteger)) == 0) {
             return @"INTEGER";
             //it's an int
         } else if (strcmp(rawPropertyType, @encode(char)) == 0) {
@@ -494,4 +587,19 @@ static QGDBManager *fmdbManager = nil;
 
 }
 
+- (NSString*)handleCondition:(NSDictionary*)condition{
+    NSMutableString *conditionStr = [[NSMutableString alloc] initWithCapacity:10];
+    if (condition && [condition isKindOfClass:[NSDictionary class]]) {
+        [condition enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [conditionStr appendFormat:@"%@ = ? and ",key];
+        }];
+        if ([conditionStr hasSuffix:@"and "]) {
+            [conditionStr deleteCharactersInRange:NSMakeRange(conditionStr.length - 4, 4)];
+        }
+        
+    } else {
+        NSLog(@"condition is error");
+    }
+    return conditionStr;
+}
 @end
