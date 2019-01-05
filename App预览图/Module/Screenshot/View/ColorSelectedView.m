@@ -7,6 +7,7 @@
 //
 
 #import "ColorSelectedView.h"
+#import "UIColor+utils.h"
 @interface ColorSelectedView ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *greenTextField;
 @property (weak, nonatomic) IBOutlet UITextField *blueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *opacityTextField;
+@property (weak, nonatomic) IBOutlet UITextField *hexTextField;
 
 @end
 @implementation ColorSelectedView
@@ -35,10 +37,10 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     self.frame = UIScreen.mainScreen.bounds;
+    [self layoutIfNeeded];
     CGRect contentViewFrame = self.contentView.frame;
     contentViewFrame.origin.y = self.frame.size.height;
     self.contentView.frame = contentViewFrame;
-    [self layoutIfNeeded];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
     effectView.tag = 1001;
     [self.contentView insertSubview:effectView atIndex:0];
@@ -58,11 +60,21 @@
 
 #pragma mark - 点击
 
+- (IBAction)cancelButtonClicked:(UIButton *)sender {
+    [self hiddenView];
+}
+- (IBAction)enterButtonClicked:(UIButton *)sender {
+    if (_resultCallBack) {
+        _resultCallBack(self.colorPreview.backgroundColor,self.hexTextField.text);
+    }
+    [self hiddenView];
+}
 - (IBAction)rgbSliderChanged:(UISlider *)sender {
     [self updateColorPreview];
     self.redTextField.text = [NSString stringWithFormat:@"%.0f",self.redslider.value];
     self.greenTextField.text = [NSString stringWithFormat:@"%.0f",self.greenslider.value];
     self.blueTextField.text = [NSString stringWithFormat:@"%.0f",self.blueslider.value];
+    self.hexTextField.text = [UIColor convertRGBToHexStringWithRed:self.redslider.value green:self.greenslider.value blue:self.blueslider.value];
 }
 - (IBAction)opacitySlider:(UISlider *)sender {
     self.opacityTextField.text = [NSString stringWithFormat:@"%.0f\%",sender.value * 100];
@@ -76,6 +88,7 @@
 - (void)showInView:(UIView*)view result:(void(^)(UIColor*color ,NSString* hexColorString)) result{
     self.resultCallBack = result;
     self.frame = view.bounds;
+    [self layoutIfNeeded];
     [self updateColorPreview];
     if (view) {
         [view addSubview:self];

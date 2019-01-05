@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "HomeVC.h"
 #import "XMBaseNC.h"
+#import "UIColor+utils.h"
+#import "QG"
 @interface AppDelegate ()
 
 @end

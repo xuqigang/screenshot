@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2497DB80E56D0330B69D3F3E /* libPods-App预览图.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B219D6E92064CFFD58073742 /* libPods-App预览图.a */; };
+		7BA70F2C21DF94F900D1D1DC /* UIColor+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */; };
+		7BE67C5321E060A200CD7F81 /* ColorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C5221E060A200CD7F81 /* ColorInfo.m */; };
 		7BE9D2A021DEEE6F00C9C3D5 /* ScreenshotEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE9D29E21DEEE6F00C9C3D5 /* ScreenshotEditVC.m */; };
 		7BE9D2A121DEEE6F00C9C3D5 /* ScreenshotEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE9D29F21DEEE6F00C9C3D5 /* ScreenshotEditVC.xib */; };
 		7BE9D2A321DEFB0C00C9C3D5 /* 0x0ss-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BE9D2A221DEFB0C00C9C3D5 /* 0x0ss-3.jpg */; };
@@ -72,6 +74,10 @@
 /* Begin PBXFileReference section */
 		03168913A83E06CB202C6AD8 /* libPods-App预览图UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-App预览图UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		788EE72CE26152B2ED55AF4D /* Pods-App预览图.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App预览图.release.xcconfig"; path = "Pods/Target Support Files/Pods-App预览图/Pods-App预览图.release.xcconfig"; sourceTree = "<group>"; };
+		7BA70F2A21DF94F900D1D1DC /* UIColor+utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+utils.h"; sourceTree = "<group>"; };
+		7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+utils.m"; sourceTree = "<group>"; };
+		7BE67C5121E060A200CD7F81 /* ColorInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorInfo.h; sourceTree = "<group>"; };
+		7BE67C5221E060A200CD7F81 /* ColorInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorInfo.m; sourceTree = "<group>"; };
 		7BE9D29D21DEEE6F00C9C3D5 /* ScreenshotEditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenshotEditVC.h; sourceTree = "<group>"; };
 		7BE9D29E21DEEE6F00C9C3D5 /* ScreenshotEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenshotEditVC.m; sourceTree = "<group>"; };
 		7BE9D29F21DEEE6F00C9C3D5 /* ScreenshotEditVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotEditVC.xib; sourceTree = "<group>"; };
@@ -337,6 +343,8 @@
 				7BF4262B21DD9E5A001920AA /* NSMutableAttributedString+AttributedString.m */,
 				7BF4261F21DD9E5A001920AA /* NSString+utils.h */,
 				7BF4262D21DD9E5A001920AA /* NSString+utils.m */,
+				7BA70F2A21DF94F900D1D1DC /* UIColor+utils.h */,
+				7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */,
 				7BF4262E21DD9E5A001920AA /* QGDBManager.h */,
 				7BF4262421DD9E5A001920AA /* QGDBManager.m */,
 				7BF4261C21DD9E5A001920AA /* QGDBTableListManager.h */,
@@ -458,6 +466,8 @@
 			children = (
 				7BF4267B21DDFFE3001920AA /* ScreenshotParameter.h */,
 				7BF4267C21DDFFE3001920AA /* ScreenshotParameter.m */,
+				7BE67C5121E060A200CD7F81 /* ColorInfo.h */,
+				7BE67C5221E060A200CD7F81 /* ColorInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -652,6 +662,7 @@
 				7BF4263F21DD9E5A001920AA /* NSMutableAttributedString+FontAwesome.m in Sources */,
 				7BF4265921DD9E5A001920AA /* UIView+utils.m in Sources */,
 				7BF4265E21DD9E5A001920AA /* UIScrollView+blankView.m in Sources */,
+				7BE67C5321E060A200CD7F81 /* ColorInfo.m in Sources */,
 				7BE9D2AB21DF42F300C9C3D5 /* ColorSelectedView.m in Sources */,
 				7BF4265F21DD9E5A001920AA /* UIView+layerXib.m in Sources */,
 				7BE9D2A621DEFE2500C9C3D5 /* ScreenshotMenuView.m in Sources */,
@@ -662,6 +673,7 @@
 				7BF4265A21DD9E5A001920AA /* UIView+frame.m in Sources */,
 				7BF4268921DE0DAF001920AA /* ScreenshotTextFiled.m in Sources */,
 				7BF4268F21DE14DB001920AA /* HomeVC.m in Sources */,
+				7BA70F2C21DF94F900D1D1DC /* UIColor+utils.m in Sources */,
 				7BF4266121DD9E5A001920AA /* NSMutableAttributedString+AttributedString.m in Sources */,
 				7BE9D2A021DEEE6F00C9C3D5 /* ScreenshotEditVC.m in Sources */,
 				7BF4263A21DD9E5A001920AA /* AppConfig.m in Sources */,
