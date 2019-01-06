@@ -438,7 +438,7 @@
 
 - (void)onStyleBtnClicked:(UIButton*)sender
 {
-    [self.delegate onBubbleTap];
+    [self.delegate onBubbleTap:self];
 }
 
 - (void)dealloc

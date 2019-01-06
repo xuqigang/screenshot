@@ -12,8 +12,9 @@
 #import "ScreenshotPasterView.h"
 #import "ScreenshotMenuView.h"
 #import "ColorSelectedView.h"
+#import "TextStyleEditView.h"
 #import "ZYQAssetPickerController.h"
-@interface ScreenshotEditVC ()<ScreenshotMenuViewDelegate,ZYQAssetPickerControllerDelegate,UINavigationControllerDelegate>
+@interface ScreenshotEditVC ()<ScreenshotMenuViewDelegate,ScreenshotTextFieldDelegate,ZYQAssetPickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) ScreenshotPreview *screenshotPreview;
 @property (nonatomic, strong) ScreenshotMenuView *screenshotMenuView;
@@ -83,6 +84,7 @@
 }
 - (void)screenshotMenuViewDidSelectedTextMaterial:(ScreenshotMenuView*)screenshotMenuView{
     ScreenshotTextFiled *textField = [[ScreenshotTextFiled alloc] initWithFrame:CGRectMake(40, 60, 150, 50)];
+    textField.delegate = self;
     [self.screenshotPreview addSubview:textField];
 }
 - (void)screenshotMenuViewDidSelectedPasterMaterial:(ScreenshotMenuView*)screenshotMenuView{
@@ -94,6 +96,22 @@
 - (void)screenshotMenuViewRevoke:(ScreenshotMenuView*)screenshotMenuView{
     
 }
+#pragma mark - ScreenshotTextFieldDelegate
+- (void)onBubbleTap:(ScreenshotTextFiled*)screenshotTextFiled{
+    [[TextStyleEditView defaultView] showInView:self.view result:^(TextStyleParameter * _Nonnull textStyleParameter) {
+        
+    }];
+}
+- (void)onTextInputBegin{
+    
+}
+- (void)onTextInputDone:(NSString*)text{
+    
+}
+- (void)onRemoveTextField:(ScreenshotTextFiled*)textField{
+    
+}
+
 #pragma mark - ZYQAssetPickerControllerDelegate
 -(void)assetPickerController:(ZYQAssetPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
     //设置图片背景

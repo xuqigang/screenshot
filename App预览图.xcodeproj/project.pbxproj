@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2497DB80E56D0330B69D3F3E /* libPods-App预览图.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B219D6E92064CFFD58073742 /* libPods-App预览图.a */; };
+		7B02C33221E109FE00CB7574 /* TextStyleEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B02C33121E109FE00CB7574 /* TextStyleEditView.m */; };
+		7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B02C33321E10A0F00CB7574 /* TextStyleEditView.xib */; };
 		7BA70F2C21DF94F900D1D1DC /* UIColor+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */; };
+		7BB035EE21E2577C00DDBE56 /* TextStyleParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB035ED21E2577C00DDBE56 /* TextStyleParameter.m */; };
 		7BE67C5321E060A200CD7F81 /* ColorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C5221E060A200CD7F81 /* ColorInfo.m */; };
 		7BE67C5621E0625F00CD7F81 /* QGDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C5421E0625F00CD7F81 /* QGDBManager.m */; };
 		7BE9D2A021DEEE6F00C9C3D5 /* ScreenshotEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE9D29E21DEEE6F00C9C3D5 /* ScreenshotEditVC.m */; };
@@ -72,8 +75,13 @@
 /* Begin PBXFileReference section */
 		03168913A83E06CB202C6AD8 /* libPods-App预览图UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-App预览图UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		788EE72CE26152B2ED55AF4D /* Pods-App预览图.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App预览图.release.xcconfig"; path = "Pods/Target Support Files/Pods-App预览图/Pods-App预览图.release.xcconfig"; sourceTree = "<group>"; };
+		7B02C33021E109FE00CB7574 /* TextStyleEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextStyleEditView.h; sourceTree = "<group>"; };
+		7B02C33121E109FE00CB7574 /* TextStyleEditView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextStyleEditView.m; sourceTree = "<group>"; };
+		7B02C33321E10A0F00CB7574 /* TextStyleEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextStyleEditView.xib; sourceTree = "<group>"; };
 		7BA70F2A21DF94F900D1D1DC /* UIColor+utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+utils.h"; sourceTree = "<group>"; };
 		7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+utils.m"; sourceTree = "<group>"; };
+		7BB035EC21E2577C00DDBE56 /* TextStyleParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextStyleParameter.h; sourceTree = "<group>"; };
+		7BB035ED21E2577C00DDBE56 /* TextStyleParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextStyleParameter.m; sourceTree = "<group>"; };
 		7BE67C5121E060A200CD7F81 /* ColorInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorInfo.h; sourceTree = "<group>"; };
 		7BE67C5221E060A200CD7F81 /* ColorInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorInfo.m; sourceTree = "<group>"; };
 		7BE67C5421E0625F00CD7F81 /* QGDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGDBManager.m; sourceTree = "<group>"; };
@@ -434,6 +442,9 @@
 				7BE9D2A421DEFE2500C9C3D5 /* ScreenshotMenuView.h */,
 				7BE9D2A521DEFE2500C9C3D5 /* ScreenshotMenuView.m */,
 				7BE9D2A721DEFE3E00C9C3D5 /* ScreenshotMenuView.xib */,
+				7B02C33021E109FE00CB7574 /* TextStyleEditView.h */,
+				7B02C33121E109FE00CB7574 /* TextStyleEditView.m */,
+				7B02C33321E10A0F00CB7574 /* TextStyleEditView.xib */,
 				7BE9D2A921DF42F300C9C3D5 /* ColorSelectedView.h */,
 				7BE9D2AA21DF42F300C9C3D5 /* ColorSelectedView.m */,
 				7BE9D2AC21DF42FE00C9C3D5 /* ColorSelectedView.xib */,
@@ -458,6 +469,8 @@
 				7BF4267C21DDFFE3001920AA /* ScreenshotParameter.m */,
 				7BE67C5121E060A200CD7F81 /* ColorInfo.h */,
 				7BE67C5221E060A200CD7F81 /* ColorInfo.m */,
+				7BB035EC21E2577C00DDBE56 /* TextStyleParameter.h */,
+				7BB035ED21E2577C00DDBE56 /* TextStyleParameter.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -562,6 +575,7 @@
 				7BF4265221DD9E5A001920AA /* buzhou04.png in Resources */,
 				7BE9D2AD21DF42FE00C9C3D5 /* ColorSelectedView.xib in Resources */,
 				7BE9D2A321DEFB0C00C9C3D5 /* 0x0ss-3.jpg in Resources */,
+				7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */,
 				7BF4265121DD9E5A001920AA /* buzhou05.png in Resources */,
 				7BF4264F21DD9E5A001920AA /* buzhou02.png in Resources */,
 				7BE9D2A821DEFE3F00C9C3D5 /* ScreenshotMenuView.xib in Resources */,
@@ -643,6 +657,7 @@
 				7BF4265D21DD9E5A001920AA /* SBJson.m in Sources */,
 				7BF4263821DD9E5A001920AA /* XMBaseModel.m in Sources */,
 				7BF425AD21DD9DD7001920AA /* ViewController.m in Sources */,
+				7B02C33221E109FE00CB7574 /* TextStyleEditView.m in Sources */,
 				7BF425B821DD9DD8001920AA /* main.m in Sources */,
 				7BF4263721DD9E5A001920AA /* XMBaseVC.m in Sources */,
 				7BF4266521DD9E5A001920AA /* NSDate+utils.m in Sources */,
@@ -660,6 +675,7 @@
 				7BE67C5621E0625F00CD7F81 /* QGDBManager.m in Sources */,
 				7BF4265A21DD9E5A001920AA /* UIView+frame.m in Sources */,
 				7BF4268921DE0DAF001920AA /* ScreenshotTextFiled.m in Sources */,
+				7BB035EE21E2577C00DDBE56 /* TextStyleParameter.m in Sources */,
 				7BF4268F21DE14DB001920AA /* HomeVC.m in Sources */,
 				7BA70F2C21DF94F900D1D1DC /* UIColor+utils.m in Sources */,
 				7BF4266121DD9E5A001920AA /* NSMutableAttributedString+AttributedString.m in Sources */,

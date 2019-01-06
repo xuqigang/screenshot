@@ -19,7 +19,7 @@
 @end
 
 @protocol ScreenshotTextFieldDelegate <NSObject>
-- (void)onBubbleTap;
+- (void)onBubbleTap:(ScreenshotTextFiled*)screenshotTextFiled;
 - (void)onTextInputBegin;
 - (void)onTextInputDone:(NSString*)text;
 - (void)onRemoveTextField:(ScreenshotTextFiled*)textField;
