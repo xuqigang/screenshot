@@ -7,6 +7,8 @@
 //
 
 #import "ScreenshotPreview.h"
+#import "ScreenshotTextFiled.h"
+#import "UIView+Additions.h"
 @interface ScreenshotPreview ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
@@ -28,12 +30,39 @@
 - (UIImage*)shellImage{
     return self.shellImage;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+- (void)generateScreenshotImageCallback:(void(^)(UIImage*image))callback{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        [self.layer renderInContext:ctx];
+        UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(1242/UIScreen.mainScreen.scale, 2208/UIScreen.mainScreen.scale), NO, 0.0);
+        [image drawInRect:CGRectMake(0, 0, 1242/UIScreen.mainScreen.scale, 2208/UIScreen.mainScreen.scale)];
+        UIImage* targetImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        if (callback) {
+            callback(targetImage);
+        }
+    });
 }
-*/
+- (UIView*)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    UIView *view = [super hitTest:point withEvent:event];
+    if (view == self) {
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(screenshotPreviewEndEdited:)]) {
+            [self.delegate screenshotPreviewEndEdited:self];
+        }
+        return nil;
+    } else {
+        return view;
+    }
+    
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+
+}
 
 @end

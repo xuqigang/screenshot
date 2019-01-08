@@ -12,7 +12,7 @@
 
 @interface ScreenshotTextFiled () <UITextViewDelegate, UITextFieldDelegate>
 {
-    UILabel*        _textLabel;                 //文字输入Label
+//    UILabel*        _textLabel;                 //文字输入Label
     UIImageView*    _borderView;                //用来显示边框或样式背景
     UIButton*       _deleteBtn;                 //删除铵钮
     UIButton*       _styleBtn;                  //样式操作按钮，目前只改字体颜色
@@ -38,7 +38,8 @@
     CGRect          _initFrame;
     BOOL            _hasSetBubble;
 }
-
+//当键盘弹起遮罩view
+@property (nonatomic, strong) UIView *maskView;
 @end
 
 @implementation ScreenshotTextFiled
@@ -53,7 +54,7 @@
         
         _borderView = [UIImageView new];
         _borderView.layer.borderWidth = 1;
-        _borderView.layer.borderColor = UIColorFromRGB(0x0accac).CGColor;
+        _borderView.layer.borderColor = ThemeColor.CGColor;
         _borderView.userInteractionEnabled = YES;
         _borderView.backgroundColor = [UIColor clearColor];
         [self addSubview:_borderView];
@@ -77,24 +78,34 @@
     
         _rotateAngleLabel = [UILabel new];
         _rotateAngleLabel.text = @"0";
-        _rotateAngleLabel.textColor = UIColor.blackColor;
+        _rotateAngleLabel.textColor = ThemeColor;
         _rotateAngleLabel.font = [UIFont systemFontOfSize:14];
         _rotateAngleLabel.numberOfLines = 1;
         _rotateAngleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_rotateAngleLabel];
         
         _deleteBtn = [UIButton new];
-        [_deleteBtn setImage:[UIImage imageNamed:@"videotext_delete"] forState:UIControlStateNormal];
+        UIFont *font = [UIFont fontAwesomeFontOfSize:14];
+        NSString *deleteTitle = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-times-circle"];
+        _deleteBtn.titleLabel.font = font;
+        [_deleteBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
+        [_deleteBtn setTitle:deleteTitle forState:UIControlStateNormal];
         [_deleteBtn addTarget:self action:@selector(onDeleteBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_deleteBtn];
         
         _styleBtn = [UIButton new];
-        [_styleBtn setImage:[UIImage imageNamed:@"videotext_style"] forState:UIControlStateNormal];
+        NSString *styleTitle = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-magic"];
+        _styleBtn.titleLabel.font = font;
+        [_styleBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
+        [_styleBtn setTitle:styleTitle forState:UIControlStateNormal];
         [_styleBtn addTarget:self action:@selector(onStyleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_styleBtn];
         
         _scaleRotateBtn = [UIButton new];
-        [_scaleRotateBtn setImage:[UIImage imageNamed:@"videotext_rotate"] forState:UIControlStateNormal];
+        NSString *rotateTitle = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-repeat"];
+        _scaleRotateBtn.titleLabel.font = font;
+        [_scaleRotateBtn setTitle:rotateTitle forState:UIControlStateNormal];
+        [_scaleRotateBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
         UIPanGestureRecognizer* panGensture = [[UIPanGestureRecognizer alloc] initWithTarget:self action: @selector (handlePanSlide:)];
         [self addSubview:_scaleRotateBtn];
         [_scaleRotateBtn addGestureRecognizer:panGensture];
@@ -108,16 +119,17 @@
         
         _inputTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, inputAccessoryView.width - 70, inputAccessoryView.height)];
         _inputTextView.textColor = UIColorFromRGB(0x434343);
-        _inputTextView.font = [UIFont systemFontOfSize:16];
+        _inputTextView.font = [UIFont systemFontOfSize:15];
         _inputTextView.textAlignment = NSTextAlignmentLeft;
         _inputTextView.delegate = self;
         _inputTextView.editable = YES;
         _inputTextView.backgroundColor = UIColor.clearColor;
         [inputAccessoryView addSubview:_inputTextView];
         
-        _inputConfirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(_inputTextView.right, 0, 60, inputAccessoryView.height)];
+        _inputConfirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(_inputTextView.right, 0, 70, inputAccessoryView.height)];
         [_inputConfirmBtn setTitle:@"确定" forState:UIControlStateNormal];
-        _inputConfirmBtn.backgroundColor = UIColorFromRGB(0x0accac);
+        _inputConfirmBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        _inputConfirmBtn.backgroundColor = ThemeColor;
         [_inputConfirmBtn addTarget:self action:@selector(onInputConfirmBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [inputAccessoryView addSubview:_inputConfirmBtn];
         
@@ -153,15 +165,23 @@
         
         
         _rotateAngle = 0.f;
+        self.isEditing = YES;
     }
     
     return self;
 }
-
+- (UIView*)maskView{
+    if (!_maskView) {
+        _maskView = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+        _maskView.backgroundColor = [UIColor clearColor];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(maskViewTap:)];
+        [_maskView addGestureRecognizer:tap];
+    }
+    return _maskView;
+}
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
     CGPoint center = [self convertPoint:self.center fromView:self.superview];
     
     _borderView.bounds = CGRectMake(0, 0, self.bounds.size.width - 25, self.bounds.size.height - 25);
@@ -197,7 +217,18 @@
         [self calculateTextLabelFont];
     }
 }
-
+- (void)setIsEditing:(BOOL)isEditing{
+    _isEditing = isEditing;
+    if (isEditing) {
+        _borderView.layer.borderColor = ThemeColor.CGColor;
+    } else {
+        _borderView.layer.borderColor = UIColor.clearColor.CGColor;
+    }
+    _deleteBtn.hidden = !isEditing;
+    _styleBtn.hidden = !isEditing;
+    _scaleRotateBtn.hidden = !isEditing;
+    _rotateAngleLabel.hidden = !isEditing;
+}
 - (NSString*)text
 {
     return _textLabel.text;
@@ -282,6 +313,7 @@
     
     _isInputting = NO;
     [_inputTextView resignFirstResponder];
+    
 }
 
 - (void)changeFirstResponder
@@ -297,17 +329,37 @@
             [_hiddenTextField resignFirstResponder];
         }
     }
+    
 }
 
 #pragma mark - GestureRecognizer handle
+
 - (void)onTap:(UITapGestureRecognizer*)recognizer
 {
-    _isInputting = YES;
-    [_hiddenTextField becomeFirstResponder];
+    if (self.isEditing == NO) {
+        [self setIsEditing:YES];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onEditing:)]) {
+            [self.delegate onEditing:self];
+        }
+    } else {
+        _isInputting = YES;
+        [_hiddenTextField becomeFirstResponder];
+        [[UIApplication sharedApplication].delegate.window addSubview:self.maskView];
+    }
 }
-
+- (void)maskViewTap:(UITapGestureRecognizer*)recongnizer{
+    _isInputting = NO;
+    [_inputTextView resignFirstResponder];
+    [_hiddenTextField resignFirstResponder];
+    [self.maskView removeFromSuperview];
+    self.maskView = nil;
+    
+}
 - (void)handlePanSlide:(UIPanGestureRecognizer*)recognizer
 {
+    if (self.isEditing == NO) {
+        return;
+    }
     //拖动
     if (recognizer.view == self) {
         CGPoint translation = [recognizer translationInView:self.superview];
@@ -371,6 +423,9 @@
 //双手指放大
 - (void)handlePinch:(UIPinchGestureRecognizer*)recognizer
 {
+    if (self.isEditing == NO) {
+        return;
+    }
     CGFloat newFontSize = MAX(10.0f, MIN(150.f, _textLabel.font.pointSize * recognizer.scale));
     // set font size
     _textLabel.font = [_textLabel.font fontWithSize:newFontSize];
@@ -390,13 +445,23 @@
 //双手指旋转
 - (void)handleRotate:(UIRotationGestureRecognizer*)recognizer
 {
+    if (self.isEditing == NO) {
+        return;
+    }
     recognizer.view.transform = CGAffineTransformRotate(recognizer.view.transform, recognizer.rotation);
 
     _rotateAngle += recognizer.rotation;
     recognizer.rotation = 0;
 }
 
-
+- (void)updatePosition{
+    if (!_hasSetBubble) {
+        _textLabel.bounds = [self textRect];
+        self.bounds = CGRectMake(0, 0, _textLabel.bounds.size.width + 50, _textLabel.bounds.size.height + 40);
+    }else{
+        [self calculateTextLabelFont];
+    }
+}
 #pragma mark - UI event handle
 - (void)onInputConfirmBtnClicked:(UIButton*)sender
 {
@@ -440,9 +505,31 @@
 {
     [self.delegate onBubbleTap:self];
 }
-
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *view = [super hitTest:point withEvent:event];
+    if (view == nil) {
+        // 转换坐标系
+        CGPoint newPoint = [_deleteBtn convertPoint:point fromView:self];
+        // 判断触摸点是否在button上
+        if (CGRectContainsPoint(_deleteBtn.bounds, newPoint)) {
+            return _deleteBtn;
+        }
+        newPoint = [_styleBtn convertPoint:point fromView:self];
+        // 判断触摸点是否在button上
+        if (CGRectContainsPoint(_styleBtn.bounds, newPoint)) {
+            return _styleBtn;
+        }
+        newPoint = [_scaleRotateBtn convertPoint:point fromView:self];
+        // 判断触摸点是否在button上
+        if (CGRectContainsPoint(_scaleRotateBtn.bounds, newPoint)) {
+            return _scaleRotateBtn;
+        }
+    }
+    return view;
+}
 - (void)dealloc
 {
+    NSLog(@"%@ 已经被释放",NSStringFromClass([self class]));
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

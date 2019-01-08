@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     ScreenshotPasterView *pasterView = [[ScreenshotPasterView alloc] initWithFrame:CGRectMake(100, 100, 100, 60)];
     UIImage *image = [UIImage imageNamed:@"1111_03"];
     [pasterView setImageList:@[image] imageDuration:0];

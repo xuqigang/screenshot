@@ -86,7 +86,7 @@
         UIColor *color = [UIColor colorWithRed:info.red/255.0 green:info.green/255.0 blue:info.blue/255.0 alpha:info.opacity];
         cell.contentView.backgroundColor = color;
     } else{
-        cell.contentView.backgroundColor = [UIColor redColor];
+        cell.contentView.backgroundColor = [UIColor clearColor];
     }
     return cell;
 }
@@ -94,7 +94,8 @@
     if (indexPath.row < [self.colorDataSource count]) {
         ColorInfo *info = [self.colorDataSource objectAtIndex:indexPath.row];
         if (_resultCallBack) {
-            _resultCallBack(info,[UIColor convertRGBToHexStringWithRed:info.red green:info.green blue:info.blue]);
+            UIColor *color = [UIColor colorWithRed:info.red green:info.green blue:info.blue alpha:info.opacity];
+            _resultCallBack(info,color,nil);
         }
     }
     [self hiddenView];
@@ -104,6 +105,9 @@
 
 - (IBAction)cancelButtonClicked:(UIButton *)sender {
     [self hiddenView];
+    if (_resultCallBack) {
+        _resultCallBack(nil,nil,[NSError new]);
+    }
 }
 - (IBAction)enterButtonClicked:(UIButton *)sender {
     ColorInfo *colorInfo = [ColorInfo new];
@@ -111,9 +115,13 @@
     colorInfo.green = (NSInteger)self.greenslider.value;
     colorInfo.blue = (NSInteger)self.blueslider.value;
     colorInfo.opacity = self.opacityslider.value;
-    if (_resultCallBack) {
-        _resultCallBack(colorInfo,self.hexTextField.text);
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self->_resultCallBack) {
+            UIColor *color = [UIColor colorWithRed:colorInfo.red/255.0 green:colorInfo.green/255.0 blue:colorInfo.blue/255.0 alpha:colorInfo.opacity];
+            self->_resultCallBack(colorInfo,color,nil);
+        }
+    });
+    
     BOOL flag = [[QGDBManager defaultManager] existData:colorInfo];
     if (flag == NO) {
         if ([self.colorDataSource count] >= _maxColorNumber) {
@@ -151,9 +159,15 @@
     UIColor *color = [UIColor colorWithRed:self.redslider.value/255.0 green:self.greenslider.value/255.0 blue:self.blueslider.value/255.0 alpha:self.opacityslider.value];
     self.colorPreview.backgroundColor = color;
 }
-- (void)showInView:(UIView*)view result:(void(^)(ColorInfo *color ,NSString* hexColorString)) result{
+- (void)showInView:(UIView*)view result:(ColorSelectedViewResultCallBack) result{
     self.resultCallBack = result;
-    self.frame = view.bounds;
+    if (view) {
+         self.frame = view.bounds;
+        [view addSubview:self];
+    } else {
+        self.frame = UIApplication.sharedApplication.delegate.window.bounds;
+        [UIApplication.sharedApplication.delegate.window addSubview:self];
+    }
     [self layoutIfNeeded];
     ColorInfo *colorInfo = [ColorInfo new];
     [[QGDBManager defaultManager] selectData:colorInfo result:^(NSMutableArray *resultSet) {
@@ -161,11 +175,7 @@
         [self.collectionView reloadData];
     }];
     [self updateColorPreview];
-    if (view) {
-        [view addSubview:self];
-    } else {
-        [UIApplication.sharedApplication.delegate.window addSubview:self];
-    }
+    
     CGRect frame = self.contentView.frame;
     frame.origin.y = self.frame.size.height - self.contentView.frame.size.height;
     [UIView animateWithDuration:0.25 animations:^{
@@ -188,6 +198,9 @@
     
     if (point.y < self.frame.size.height - 340) {
         [self hiddenView];
+        if (_resultCallBack) {
+            _resultCallBack(nil,nil,[NSError new]);
+        }
     }
 }
 @end

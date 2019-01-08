@@ -34,7 +34,7 @@
     [self.pasterMenuView addGestureRecognizer:pasterTap];
     UITapGestureRecognizer *shareTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareMenuClicked:)];
     [self.shareMenuView addGestureRecognizer:shareTap];
-    UITapGestureRecognizer *revokeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareMenuClicked:)];
+    UITapGestureRecognizer *revokeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(revokeMenuClicked:)];
     [self.revokeMenuView addGestureRecognizer:revokeTap];
 }
 

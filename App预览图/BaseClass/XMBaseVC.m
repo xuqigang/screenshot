@@ -32,15 +32,27 @@
 //       NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     
-    
     //设置返回按钮
     [self setLeftButtonText:@"返回"];
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.barTintColor = ThemeColor;
+}
 - (void) setNavigationBarColor:(UIColor *) color
 {
-    
-    self.navigationController.navigationBar.barTintColor = color;
+    if([color isEqual:[UIColor clearColor]]) {
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    } else if(color){
+        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setShadowImage:nil];
+        self.navigationController.navigationBar.barTintColor = color;
+    } else {
+        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setShadowImage:nil];
+        
+    }
 }
 
 //设置左按钮

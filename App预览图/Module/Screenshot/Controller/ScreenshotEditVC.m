@@ -14,18 +14,25 @@
 #import "ColorSelectedView.h"
 #import "TextStyleEditView.h"
 #import "ZYQAssetPickerController.h"
-@interface ScreenshotEditVC ()<ScreenshotMenuViewDelegate,ScreenshotTextFieldDelegate,ZYQAssetPickerControllerDelegate,UINavigationControllerDelegate>
-
+#import "ScreenshotPreviewVC.h"
+@interface ScreenshotEditVC ()<ScreenshotMenuViewDelegate,ScreenshotTextFieldDelegate,ScreenshotPreviewDelegate, ZYQAssetPickerControllerDelegate,UINavigationControllerDelegate>
+@property (nonatomic, strong) NSMutableArray *materialArray;
 @property (nonatomic, strong) ScreenshotPreview *screenshotPreview;
 @property (nonatomic, strong) ScreenshotMenuView *screenshotMenuView;
 @end
 
 @implementation ScreenshotEditVC
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        self.materialArray = [NSMutableArray arrayWithCapacity:1];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-   
     // Do any additional setup after loading the view from its nib.
 }
 - (void)setupUI{
@@ -53,6 +60,7 @@
 - (ScreenshotPreview*)screenshotPreview{
     if (!_screenshotPreview) {
         _screenshotPreview = [ScreenshotPreview instanceFromNib];
+        _screenshotPreview.delegate = self;
     }
     return _screenshotPreview;
 }
@@ -63,12 +71,31 @@
     }
     return _screenshotMenuView;
 }
+#pragma mark - 父类
+- (void)rightButtonClicked:(UIButton *)button //需要时，在子类重写
+{
+    [self.screenshotPreview generateScreenshotImageCallback:^(UIImage * _Nonnull image) {
+        UIImageWriteToSavedPhotosAlbum(image, self,@selector(image:didFinishSavingWithError:contextInfo:),nil);
+    }];
+}
+- (void)rightSecondButtonClicked:(UIButton *)button //需要时，在子类重写
+{
+    [self.screenshotPreview generateScreenshotImageCallback:^(UIImage * _Nonnull image) {
+        ScreenshotPreviewVC *vc = [ScreenshotPreviewVC instanceFromNib];
+        vc.preImage = image;
+        PushViewController(vc);
+    }];
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    [SVProgressHUD showSuccessWithStatus:@"快照保存成功"];
+}
 
 #pragma mark - ScreenshotMenuViewDelegate
 - (void)screenshotMenuViewDidSelectedBackgroundColor:(ScreenshotMenuView*)screenshotMenuView{
-    [[ColorSelectedView defaultView] showInView:self.view result:^(ColorInfo * _Nonnull color, NSString * _Nonnull hexColorString) {
-        UIColor *backgroundColor = [UIColor colorWithRed:color.red/255.0 green:color.green/255.0 blue:color.blue/255.0 alpha:color.opacity];
-        [self.screenshotPreview setBackgroundColor:backgroundColor];
+    [[ColorSelectedView defaultView] showInView:self.view result:^(ColorInfo * _Nullable colorInfo, UIColor * _Nullable color, NSError * _Nullable error) {
+        if (error == nil) {
+            [self.screenshotPreview setBackgroundColor:color];
+        }
     }];
 }
 - (void)screenshotMenuViewDidSelectedBackgroundImage:(ScreenshotMenuView*)screenshotMenuView{
@@ -86,6 +113,13 @@
     ScreenshotTextFiled *textField = [[ScreenshotTextFiled alloc] initWithFrame:CGRectMake(40, 60, 150, 50)];
     textField.delegate = self;
     [self.screenshotPreview addSubview:textField];
+    [self.materialArray addObject:textField];
+    [self.materialArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![obj isEqual:textField]) {
+            [obj setIsEditing:NO];
+            [obj resignFirstResponser];
+        }
+    }];
 }
 - (void)screenshotMenuViewDidSelectedPasterMaterial:(ScreenshotMenuView*)screenshotMenuView{
     
@@ -94,12 +128,24 @@
     
 }
 - (void)screenshotMenuViewRevoke:(ScreenshotMenuView*)screenshotMenuView{
-    
+    if ([self.materialArray count] > 0) {
+        id view = [self.materialArray objectAtIndex:0];
+        [view removeFromSuperview];
+        [self.materialArray removeObjectAtIndex:0];
+    }
 }
 #pragma mark - ScreenshotTextFieldDelegate
+- (void)onEditing:(ScreenshotTextFiled*)screenshotTextFiled{
+    [self.materialArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![obj isEqual:screenshotTextFiled]) {
+            [obj setIsEditing:NO];
+            [obj resignFirstResponser];
+        }
+    }];
+}
 - (void)onBubbleTap:(ScreenshotTextFiled*)screenshotTextFiled{
-    [[TextStyleEditView defaultView] showInView:self.view result:^(TextStyleParameter * _Nonnull textStyleParameter) {
-        
+    [[TextStyleEditView defaultView] showInView:self.view result:^(TextStyleParameter * _Nullable textStyleParameter, NSError * _Nullable error) {
+        [self modifyTextStyleInScreenshotTextFiled:screenshotTextFiled withTextStyleParameter:textStyleParameter];
     }];
 }
 - (void)onTextInputBegin{
@@ -109,7 +155,7 @@
     
 }
 - (void)onRemoveTextField:(ScreenshotTextFiled*)textField{
-    
+    [self.materialArray removeObject:textField];
 }
 
 #pragma mark - ZYQAssetPickerControllerDelegate
@@ -119,6 +165,51 @@
     [asset setGetFullScreenImage:^(UIImage *result) {
         [self.screenshotPreview setBackgroundImage:result];
     }];
+}
+
+#pragma mark - ScreenshotPreviewDelegate
+- (void)screenshotPreviewEndEdited:(ScreenshotPreview*)screenshotPreview{
+    [self.materialArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj setIsEditing:NO];
+    }];
+}
+#pragma mark - 其它
+- (void)modifyTextStyleInScreenshotTextFiled:(ScreenshotTextFiled*)textFiled withTextStyleParameter:(TextStyleParameter*)parameter{
+    if (parameter) {
+        if (parameter.overstriking) {
+            textFiled.textLabel.font = [UIFont boldSystemFontOfSize:parameter.fontSize];
+        } else {
+            textFiled.textLabel.font = [UIFont systemFontOfSize:parameter.fontSize];
+        }
+        if (parameter.textColorInfo) {
+            textFiled.textLabel.textColor = [UIColor colorWithRed:parameter.textColorInfo.red/255.0 green:parameter.textColorInfo.green/255.0 blue:parameter.textColorInfo.blue/255.0 alpha:parameter.textColorInfo.opacity];
+        } else {
+            textFiled.textLabel.textColor = [UIColor clearColor];
+        }
+        switch (parameter.alignment) {
+            case 10:
+                textFiled.textLabel.textAlignment = NSTextAlignmentLeft;
+                break;
+            case 11:
+                textFiled.textLabel.textAlignment = NSTextAlignmentCenter;
+                break;
+            case 12:
+                textFiled.textLabel.textAlignment = NSTextAlignmentRight;
+                break;
+            default:
+                textFiled.textLabel.textAlignment = NSTextAlignmentLeft;
+                break;
+        }
+        if (parameter.backgroundColorInfo) {
+            textFiled.textLabel.backgroundColor = [UIColor colorWithRed:parameter.backgroundColorInfo.red/255.0 green:parameter.backgroundColorInfo.green/255.0 blue:parameter.backgroundColorInfo.blue/255.0 alpha:parameter.backgroundColorInfo.opacity];
+        } else {
+            textFiled.textLabel.backgroundColor = [UIColor clearColor];
+        }
+        
+//        textFiled.textLabel.shadowColor = parameter.shaowColorInfo == nil ? [UIColor clearColor] : [UIColor colorWithRed:parameter.shaowColorInfo.red/255.0 green:parameter.shaowColorInfo.green/255.0 blue:parameter.shaowColorInfo.blue/255.0 alpha:parameter.shaowColorInfo.opacity];
+        textFiled.textLabel.alpha = parameter.opacity;
+        [textFiled updatePosition];
+    }
 }
 /*
 #pragma mark - Navigation

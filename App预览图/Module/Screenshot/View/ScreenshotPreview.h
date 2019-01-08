@@ -9,11 +9,19 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@class ScreenshotPreview;
+@protocol ScreenshotPreviewDelegate <NSObject>
 
+- (void)screenshotPreviewEndEdited:(ScreenshotPreview*)screenshotPreview;
+
+@end
 @interface ScreenshotPreview : UIView
 
+@property (nonatomic, weak) id<ScreenshotPreviewDelegate> delegate;
 @property (nonatomic, strong) UIImage * _Nullable backgroundImage;
 @property (nonatomic, strong) UIImage * _Nullable shellImage;
+
+- (void)generateScreenshotImageCallback:(void(^)(UIImage*image))callback;
 
 @end
 

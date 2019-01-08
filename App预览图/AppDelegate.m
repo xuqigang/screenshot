@@ -22,6 +22,8 @@
     [[QGDBManager defaultManager] registerTableClass:@[@"ColorInfo"] result:^(NSDictionary *response) {
         NSLog(@"%@",response);
     }];
+    [SVProgressHUD setMaximumDismissTimeInterval:2.5];
+    [SVProgressHUD setMinimumDismissTimeInterval:2.5];
     // Override point for customization after application launch.
     HomeVC *vc = [HomeVC instanceFromNib];
     XMBaseNC * nv = [[XMBaseNC alloc] initWithRootViewController:vc];

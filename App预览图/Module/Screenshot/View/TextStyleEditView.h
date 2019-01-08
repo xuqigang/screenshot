@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "TextStyleParameter.h"
 NS_ASSUME_NONNULL_BEGIN
-typedef void(^TextStyleEditViewResultCallBack)(TextStyleParameter *textStyleParameter);
+typedef void(^TextStyleEditViewResultCallBack)(TextStyleParameter * _Nullable textStyleParameter,NSError * _Nullable error);
 @interface TextStyleEditView : UIView
 + (instancetype)defaultView;
-- (void)showInView:(UIView*)view result:(TextStyleEditViewResultCallBack) result;
+- (void)showInView:(UIView * _Nullable )view result:(TextStyleEditViewResultCallBack) result;
+- (void)hiddenView;
 @end
 
 NS_ASSUME_NONNULL_END

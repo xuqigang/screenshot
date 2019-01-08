@@ -10,6 +10,8 @@
 		2497DB80E56D0330B69D3F3E /* libPods-App预览图.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B219D6E92064CFFD58073742 /* libPods-App预览图.a */; };
 		7B02C33221E109FE00CB7574 /* TextStyleEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B02C33121E109FE00CB7574 /* TextStyleEditView.m */; };
 		7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B02C33321E10A0F00CB7574 /* TextStyleEditView.xib */; };
+		7B230BA321E3410A006F7B5B /* ScreenshotPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B230BA121E3410A006F7B5B /* ScreenshotPreviewVC.m */; };
+		7B230BA421E3410A006F7B5B /* ScreenshotPreviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B230BA221E3410A006F7B5B /* ScreenshotPreviewVC.xib */; };
 		7BA70F2C21DF94F900D1D1DC /* UIColor+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */; };
 		7BB035EE21E2577C00DDBE56 /* TextStyleParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB035ED21E2577C00DDBE56 /* TextStyleParameter.m */; };
 		7BE67C5321E060A200CD7F81 /* ColorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C5221E060A200CD7F81 /* ColorInfo.m */; };
@@ -34,7 +36,6 @@
 		7BF4263921DD9E5A001920AA /* XMBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF425D321DD9E59001920AA /* XMBaseView.m */; };
 		7BF4263A21DD9E5A001920AA /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF425D921DD9E59001920AA /* AppConfig.m */; };
 		7BF4263D21DD9E5A001920AA /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF425E221DD9E59001920AA /* UIImage+FontAwesome.m */; };
-		7BF4263E21DD9E5A001920AA /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF425E321DD9E59001920AA /* FontAwesome.ttf */; };
 		7BF4263F21DD9E5A001920AA /* NSMutableAttributedString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF425E421DD9E59001920AA /* NSMutableAttributedString+FontAwesome.m */; };
 		7BF4264E21DD9E5A001920AA /* buzhou03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF4260921DD9E5A001920AA /* buzhou03.png */; };
 		7BF4264F21DD9E5A001920AA /* buzhou02.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF4260A21DD9E5A001920AA /* buzhou02.png */; };
@@ -78,6 +79,9 @@
 		7B02C33021E109FE00CB7574 /* TextStyleEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextStyleEditView.h; sourceTree = "<group>"; };
 		7B02C33121E109FE00CB7574 /* TextStyleEditView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextStyleEditView.m; sourceTree = "<group>"; };
 		7B02C33321E10A0F00CB7574 /* TextStyleEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextStyleEditView.xib; sourceTree = "<group>"; };
+		7B230BA021E3410A006F7B5B /* ScreenshotPreviewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenshotPreviewVC.h; sourceTree = "<group>"; };
+		7B230BA121E3410A006F7B5B /* ScreenshotPreviewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenshotPreviewVC.m; sourceTree = "<group>"; };
+		7B230BA221E3410A006F7B5B /* ScreenshotPreviewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotPreviewVC.xib; sourceTree = "<group>"; };
 		7BA70F2A21DF94F900D1D1DC /* UIColor+utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+utils.h"; sourceTree = "<group>"; };
 		7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+utils.m"; sourceTree = "<group>"; };
 		7BB035EC21E2577C00DDBE56 /* TextStyleParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextStyleParameter.h; sourceTree = "<group>"; };
@@ -122,7 +126,6 @@
 		7BF425DC21DD9E59001920AA /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		7BF425E121DD9E59001920AA /* NSMutableAttributedString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+FontAwesome.h"; sourceTree = "<group>"; };
 		7BF425E221DD9E59001920AA /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
-		7BF425E321DD9E59001920AA /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		7BF425E421DD9E59001920AA /* NSMutableAttributedString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+FontAwesome.m"; sourceTree = "<group>"; };
 		7BF425E521DD9E59001920AA /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
 		7BF4260721DD9E59001920AA /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -301,7 +304,6 @@
 			children = (
 				7BF425E121DD9E59001920AA /* NSMutableAttributedString+FontAwesome.h */,
 				7BF425E221DD9E59001920AA /* UIImage+FontAwesome.m */,
-				7BF425E321DD9E59001920AA /* FontAwesome.ttf */,
 				7BF425E421DD9E59001920AA /* NSMutableAttributedString+FontAwesome.m */,
 				7BF425E521DD9E59001920AA /* UIImage+FontAwesome.h */,
 			);
@@ -458,6 +460,9 @@
 				7BE9D29D21DEEE6F00C9C3D5 /* ScreenshotEditVC.h */,
 				7BE9D29E21DEEE6F00C9C3D5 /* ScreenshotEditVC.m */,
 				7BE9D29F21DEEE6F00C9C3D5 /* ScreenshotEditVC.xib */,
+				7B230BA021E3410A006F7B5B /* ScreenshotPreviewVC.h */,
+				7B230BA121E3410A006F7B5B /* ScreenshotPreviewVC.m */,
+				7B230BA221E3410A006F7B5B /* ScreenshotPreviewVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -567,11 +572,11 @@
 				7BF425B521DD9DD8001920AA /* LaunchScreen.storyboard in Resources */,
 				7BF425B221DD9DD8001920AA /* Assets.xcassets in Resources */,
 				7BF4267621DDFA3B001920AA /* ScreenshotPreview.xib in Resources */,
+				7B230BA421E3410A006F7B5B /* ScreenshotPreviewVC.xib in Resources */,
 				7BF425B021DD9DD7001920AA /* Main.storyboard in Resources */,
 				7BF4265021DD9E5A001920AA /* buzhou01.png in Resources */,
 				7BF4268B21DE1185001920AA /* 1111_03.png in Resources */,
 				7BE9D2A121DEEE6F00C9C3D5 /* ScreenshotEditVC.xib in Resources */,
-				7BF4263E21DD9E5A001920AA /* FontAwesome.ttf in Resources */,
 				7BF4265221DD9E5A001920AA /* buzhou04.png in Resources */,
 				7BE9D2AD21DF42FE00C9C3D5 /* ColorSelectedView.xib in Resources */,
 				7BE9D2A321DEFB0C00C9C3D5 /* 0x0ss-3.jpg in Resources */,
@@ -649,6 +654,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B230BA321E3410A006F7B5B /* ScreenshotPreviewVC.m in Sources */,
 				7BF4265C21DD9E5A001920AA /* AssignToObject.m in Sources */,
 				7BF4263621DD9E5A001920AA /* XMBaseNC.m in Sources */,
 				7BF4263921DD9E5A001920AA /* XMBaseView.m in Sources */,

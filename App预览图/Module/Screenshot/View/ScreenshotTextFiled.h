@@ -19,6 +19,7 @@
 @end
 
 @protocol ScreenshotTextFieldDelegate <NSObject>
+- (void)onEditing:(ScreenshotTextFiled*)screenshotTextFiled;
 - (void)onBubbleTap:(ScreenshotTextFiled*)screenshotTextFiled;
 - (void)onTextInputBegin;
 - (void)onTextInputDone:(NSString*)text;
@@ -30,7 +31,10 @@
 @property (nonatomic, weak) id<ScreenshotTextFieldDelegate> delegate;
 @property (nonatomic, copy, readonly) NSString* text;
 @property (nonatomic, readonly) UIImage* textImage;             //生成字幕image
+@property (nonatomic, strong) UILabel* textLabel;                 //文字输入Label
+@property (nonatomic, assign) BOOL isEditing;  //正在编辑
 
+- (void)updatePosition;
 - (void)setTextBubbleImage:(UIImage *)image textNormalizationFrame:(CGRect)frame;
 
 - (CGRect)textFrameOnView:(UIView*)view;
