@@ -218,7 +218,7 @@
     UITouch *touch = [allTouches anyObject];   //视图中的所有对象
     CGPoint point = [touch locationInView:self]; //
     
-    if (point.y < self.frame.size.height - 340) {
+    if (point.y < self.frame.size.height - self.contentView.frame.size.height) {
         [self hiddenView];
     }
 }

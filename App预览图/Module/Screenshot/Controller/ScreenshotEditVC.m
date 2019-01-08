@@ -12,6 +12,7 @@
 #import "ScreenshotPasterView.h"
 #import "ScreenshotMenuView.h"
 #import "ColorSelectedView.h"
+#import "PasterSelectView.h"
 #import "TextStyleEditView.h"
 #import "ZYQAssetPickerController.h"
 #import "ScreenshotPreviewVC.h"
@@ -122,7 +123,9 @@
     }];
 }
 - (void)screenshotMenuViewDidSelectedPasterMaterial:(ScreenshotMenuView*)screenshotMenuView{
-    
+    [[PasterSelectView defaultView] showInView:self.view result:^(PasterInfo * _Nullable pasterInfo, NSError * _Nullable error) {
+        
+    }];
 }
 - (void)screenshotMenuViewShare:(ScreenshotMenuView*)screenshotMenuView{
     

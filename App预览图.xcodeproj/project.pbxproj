@@ -12,8 +12,14 @@
 		7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B02C33321E10A0F00CB7574 /* TextStyleEditView.xib */; };
 		7B230BA321E3410A006F7B5B /* ScreenshotPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B230BA121E3410A006F7B5B /* ScreenshotPreviewVC.m */; };
 		7B230BA421E3410A006F7B5B /* ScreenshotPreviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B230BA221E3410A006F7B5B /* ScreenshotPreviewVC.xib */; };
+		7B6BBB8121E4A7B8002E1406 /* PasterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6BBB7F21E4A7B8002E1406 /* PasterViewCell.m */; };
+		7B6BBB8221E4A7B8002E1406 /* PasterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6BBB8021E4A7B8002E1406 /* PasterViewCell.xib */; };
+		7B6BBB8521E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6BBB8421E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m */; };
 		7BA70F2C21DF94F900D1D1DC /* UIColor+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */; };
 		7BB035EE21E2577C00DDBE56 /* TextStyleParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB035ED21E2577C00DDBE56 /* TextStyleParameter.m */; };
+		7BB1143221E49AA1007668E1 /* PasterSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB1143121E49AA1007668E1 /* PasterSelectView.m */; };
+		7BB1143421E49AAD007668E1 /* PasterSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB1143321E49AAD007668E1 /* PasterSelectView.xib */; };
+		7BB1143721E4A09A007668E1 /* PasterInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB1143621E4A09A007668E1 /* PasterInfo.m */; };
 		7BE67C5321E060A200CD7F81 /* ColorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C5221E060A200CD7F81 /* ColorInfo.m */; };
 		7BE67C5621E0625F00CD7F81 /* QGDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C5421E0625F00CD7F81 /* QGDBManager.m */; };
 		7BE9D2A021DEEE6F00C9C3D5 /* ScreenshotEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE9D29E21DEEE6F00C9C3D5 /* ScreenshotEditVC.m */; };
@@ -82,10 +88,20 @@
 		7B230BA021E3410A006F7B5B /* ScreenshotPreviewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenshotPreviewVC.h; sourceTree = "<group>"; };
 		7B230BA121E3410A006F7B5B /* ScreenshotPreviewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenshotPreviewVC.m; sourceTree = "<group>"; };
 		7B230BA221E3410A006F7B5B /* ScreenshotPreviewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotPreviewVC.xib; sourceTree = "<group>"; };
+		7B6BBB7E21E4A7B8002E1406 /* PasterViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasterViewCell.h; sourceTree = "<group>"; };
+		7B6BBB7F21E4A7B8002E1406 /* PasterViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasterViewCell.m; sourceTree = "<group>"; };
+		7B6BBB8021E4A7B8002E1406 /* PasterViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasterViewCell.xib; sourceTree = "<group>"; };
+		7B6BBB8321E4AB4E002E1406 /* ILGCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILGCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		7B6BBB8421E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILGCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		7BA70F2A21DF94F900D1D1DC /* UIColor+utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+utils.h"; sourceTree = "<group>"; };
 		7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+utils.m"; sourceTree = "<group>"; };
 		7BB035EC21E2577C00DDBE56 /* TextStyleParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextStyleParameter.h; sourceTree = "<group>"; };
 		7BB035ED21E2577C00DDBE56 /* TextStyleParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextStyleParameter.m; sourceTree = "<group>"; };
+		7BB1143021E49AA1007668E1 /* PasterSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasterSelectView.h; sourceTree = "<group>"; };
+		7BB1143121E49AA1007668E1 /* PasterSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasterSelectView.m; sourceTree = "<group>"; };
+		7BB1143321E49AAD007668E1 /* PasterSelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasterSelectView.xib; sourceTree = "<group>"; };
+		7BB1143521E4A09A007668E1 /* PasterInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasterInfo.h; sourceTree = "<group>"; };
+		7BB1143621E4A09A007668E1 /* PasterInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasterInfo.m; sourceTree = "<group>"; };
 		7BE67C5121E060A200CD7F81 /* ColorInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorInfo.h; sourceTree = "<group>"; };
 		7BE67C5221E060A200CD7F81 /* ColorInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorInfo.m; sourceTree = "<group>"; };
 		7BE67C5421E0625F00CD7F81 /* QGDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGDBManager.m; sourceTree = "<group>"; };
@@ -341,6 +357,8 @@
 		7BF4261A21DD9E5A001920AA /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				7B6BBB8321E4AB4E002E1406 /* ILGCollectionViewFlowLayout.h */,
+				7B6BBB8421E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m */,
 				7BF4263421DD9E5A001920AA /* AssignToObject.h */,
 				7BF4262521DD9E5A001920AA /* AssignToObject.m */,
 				7BF4262321DD9E5A001920AA /* NSDate+utils.h */,
@@ -441,6 +459,12 @@
 				7BF4268421DE0D85001920AA /* ScreenshotPasterView.m */,
 				7BF4268721DE0DAF001920AA /* ScreenshotTextFiled.h */,
 				7BF4268821DE0DAF001920AA /* ScreenshotTextFiled.m */,
+				7B6BBB7E21E4A7B8002E1406 /* PasterViewCell.h */,
+				7B6BBB7F21E4A7B8002E1406 /* PasterViewCell.m */,
+				7B6BBB8021E4A7B8002E1406 /* PasterViewCell.xib */,
+				7BB1143021E49AA1007668E1 /* PasterSelectView.h */,
+				7BB1143121E49AA1007668E1 /* PasterSelectView.m */,
+				7BB1143321E49AAD007668E1 /* PasterSelectView.xib */,
 				7BE9D2A421DEFE2500C9C3D5 /* ScreenshotMenuView.h */,
 				7BE9D2A521DEFE2500C9C3D5 /* ScreenshotMenuView.m */,
 				7BE9D2A721DEFE3E00C9C3D5 /* ScreenshotMenuView.xib */,
@@ -474,6 +498,8 @@
 				7BF4267C21DDFFE3001920AA /* ScreenshotParameter.m */,
 				7BE67C5121E060A200CD7F81 /* ColorInfo.h */,
 				7BE67C5221E060A200CD7F81 /* ColorInfo.m */,
+				7BB1143521E4A09A007668E1 /* PasterInfo.h */,
+				7BB1143621E4A09A007668E1 /* PasterInfo.m */,
 				7BB035EC21E2577C00DDBE56 /* TextStyleParameter.h */,
 				7BB035ED21E2577C00DDBE56 /* TextStyleParameter.m */,
 			);
@@ -583,7 +609,9 @@
 				7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */,
 				7BF4265121DD9E5A001920AA /* buzhou05.png in Resources */,
 				7BF4264F21DD9E5A001920AA /* buzhou02.png in Resources */,
+				7B6BBB8221E4A7B8002E1406 /* PasterViewCell.xib in Resources */,
 				7BE9D2A821DEFE3F00C9C3D5 /* ScreenshotMenuView.xib in Resources */,
+				7BB1143421E49AAD007668E1 /* PasterSelectView.xib in Resources */,
 				7BF4264E21DD9E5A001920AA /* buzhou03.png in Resources */,
 				7BF4269021DE14DB001920AA /* HomeVC.xib in Resources */,
 			);
@@ -654,14 +682,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BB1143721E4A09A007668E1 /* PasterInfo.m in Sources */,
 				7B230BA321E3410A006F7B5B /* ScreenshotPreviewVC.m in Sources */,
 				7BF4265C21DD9E5A001920AA /* AssignToObject.m in Sources */,
 				7BF4263621DD9E5A001920AA /* XMBaseNC.m in Sources */,
 				7BF4263921DD9E5A001920AA /* XMBaseView.m in Sources */,
 				7BF4266321DD9E5A001920AA /* NSString+utils.m in Sources */,
 				7BF4268621DE0D85001920AA /* ScreenshotPasterView.m in Sources */,
+				7B6BBB8521E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m in Sources */,
 				7BF4265D21DD9E5A001920AA /* SBJson.m in Sources */,
 				7BF4263821DD9E5A001920AA /* XMBaseModel.m in Sources */,
+				7B6BBB8121E4A7B8002E1406 /* PasterViewCell.m in Sources */,
 				7BF425AD21DD9DD7001920AA /* ViewController.m in Sources */,
 				7B02C33221E109FE00CB7574 /* TextStyleEditView.m in Sources */,
 				7BF425B821DD9DD8001920AA /* main.m in Sources */,
@@ -673,6 +704,7 @@
 				7BF4265E21DD9E5A001920AA /* UIScrollView+blankView.m in Sources */,
 				7BE67C5321E060A200CD7F81 /* ColorInfo.m in Sources */,
 				7BE9D2AB21DF42F300C9C3D5 /* ColorSelectedView.m in Sources */,
+				7BB1143221E49AA1007668E1 /* PasterSelectView.m in Sources */,
 				7BF4265F21DD9E5A001920AA /* UIView+layerXib.m in Sources */,
 				7BE9D2A621DEFE2500C9C3D5 /* ScreenshotMenuView.m in Sources */,
 				7BF4267D21DDFFE3001920AA /* ScreenshotParameter.m in Sources */,
