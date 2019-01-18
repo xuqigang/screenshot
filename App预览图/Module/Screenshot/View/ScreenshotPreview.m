@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *shellImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *screenshotImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *shellTopConstraint;
 
 @end
 @implementation ScreenshotPreview
@@ -30,7 +31,10 @@
 - (UIImage*)shellImage{
     return self.shellImage;
 }
-
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    self.shellTopConstraint.constant = (self.frame.size.height - self.shellImageView.frame.size.height) * 0.75;
+}
 - (void)generateScreenshotImageCallback:(void(^)(UIImage*image))callback{
     dispatch_async(dispatch_get_main_queue(), ^{
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);
