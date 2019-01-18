@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PasterInfo.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PasterViewCell : UICollectionViewCell
+
+- (void)setupCellData:(PasterInfo* _Nullable)cellData;
 
 @end
 

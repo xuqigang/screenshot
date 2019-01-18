@@ -126,8 +126,8 @@
         
         //创建一个传过来字符串（类名）相应的对象
         
-        id model = [[objc_getClass([modelClass UTF8String]) alloc] initWithDictionary:jsonDic];
-        
+        id model = [[NSClassFromString(modelClass) alloc] init];
+        [model setValuesForKeysWithDictionary:jsonDic];
         //        NSLog(@"%@",jsonDic);
         
         //        //给model中的属性赋值

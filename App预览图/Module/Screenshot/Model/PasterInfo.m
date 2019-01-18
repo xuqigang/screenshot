@@ -9,5 +9,7 @@
 #import "PasterInfo.h"
 
 @implementation PasterInfo
-
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+}
 @end

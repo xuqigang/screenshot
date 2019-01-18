@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ScreenshotMenuViewDelegate <NSObject>
 
 - (void)screenshotMenuViewDidDeleteBackgroundImage:(ScreenshotMenuView*)screenshotMenuView;
-- (void)screenshotMenuViewDidSelectedBackgroundColor:(ScreenshotMenuView*)screenshotMenuView;
+- (void)screenshotMenuViewDidSelectedBackground:(ScreenshotMenuView*)screenshotMenuView;
 - (void)screenshotMenuViewDidSelectedBackgroundImage:(ScreenshotMenuView*)screenshotMenuView;
 - (void)screenshotMenuViewDidSelectedTextMaterial:(ScreenshotMenuView*)screenshotMenuView;
 - (void)screenshotMenuViewDidSelectedPasterMaterial:(ScreenshotMenuView*)screenshotMenuView;

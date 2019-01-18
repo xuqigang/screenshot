@@ -16,10 +16,12 @@
 #import "TextStyleEditView.h"
 #import "ZYQAssetPickerController.h"
 #import "ScreenshotPreviewVC.h"
-@interface ScreenshotEditVC ()<ScreenshotMenuViewDelegate,ScreenshotTextFieldDelegate,ScreenshotPreviewDelegate, ZYQAssetPickerControllerDelegate,UINavigationControllerDelegate>
+#import "BackgroundFuctionPanelView.h"
+@interface ScreenshotEditVC ()<ScreenshotMenuViewDelegate,ScreenshotTextFieldDelegate,ScreenshotPreviewDelegate,ScreenshotPasterViewDelegate, ZYQAssetPickerControllerDelegate,UINavigationControllerDelegate,BackgroundFuctionPanelViewDelegate>
 @property (nonatomic, strong) NSMutableArray *materialArray;
 @property (nonatomic, strong) ScreenshotPreview *screenshotPreview;
 @property (nonatomic, strong) ScreenshotMenuView *screenshotMenuView;
+@property (nonatomic, strong) BackgroundFuctionPanelView *backgroundFuctionPanelView;
 @end
 
 @implementation ScreenshotEditVC
@@ -72,6 +74,13 @@
     }
     return _screenshotMenuView;
 }
+- (BackgroundFuctionPanelView*)backgroundFuctionPanelView{
+    if (!_backgroundFuctionPanelView) {
+        _backgroundFuctionPanelView = [BackgroundFuctionPanelView defaultView];
+        _backgroundFuctionPanelView.delegate = self;
+    }
+    return _backgroundFuctionPanelView;
+}
 #pragma mark - 父类
 - (void)rightButtonClicked:(UIButton *)button //需要时，在子类重写
 {
@@ -92,39 +101,44 @@
 }
 
 #pragma mark - ScreenshotMenuViewDelegate
-- (void)screenshotMenuViewDidSelectedBackgroundColor:(ScreenshotMenuView*)screenshotMenuView{
-    [[ColorSelectedView defaultView] showInView:self.view result:^(ColorInfo * _Nullable colorInfo, UIColor * _Nullable color, NSError * _Nullable error) {
-        if (error == nil) {
-            [self.screenshotPreview setBackgroundColor:color];
-        }
-    }];
-}
-- (void)screenshotMenuViewDidSelectedBackgroundImage:(ScreenshotMenuView*)screenshotMenuView{
-    ZYQAssetPickerController *pickerController = [[ZYQAssetPickerController alloc] init];
-    pickerController.maximumNumberOfSelection = 1;
-    pickerController.assetsFilter = ZYQAssetsFilterAllAssets;
-    pickerController.showEmptyGroups=NO;
-    pickerController.delegate=self;
-    [self presentViewController:pickerController animated:YES completion:nil];
+- (void)screenshotMenuViewDidSelectedBackground:(ScreenshotMenuView*)screenshotMenuView{
+    [self.backgroundFuctionPanelView showInView:self.view];
 }
 - (void)screenshotMenuViewDidDeleteBackgroundImage:(ScreenshotMenuView*)screenshotMenuView{
     [self.screenshotPreview setBackgroundImage:nil];
 }
 - (void)screenshotMenuViewDidSelectedTextMaterial:(ScreenshotMenuView*)screenshotMenuView{
-    ScreenshotTextFiled *textField = [[ScreenshotTextFiled alloc] initWithFrame:CGRectMake(40, 60, 150, 50)];
+    
+    CGFloat y = arc4random() % 100 + 60;
+    CGFloat x = arc4random() % 100 + 20;
+    ScreenshotTextFiled *textField = [[ScreenshotTextFiled alloc] initWithFrame:CGRectMake(x, y, 150, 50)];
     textField.delegate = self;
     [self.screenshotPreview addSubview:textField];
     [self.materialArray addObject:textField];
     [self.materialArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (![obj isEqual:textField]) {
             [obj setIsEditing:NO];
-            [obj resignFirstResponser];
+            if ([obj isKindOfClass:[ScreenshotTextFiled class]]) {
+                [obj resignFirstResponser];
+            }
         }
     }];
 }
 - (void)screenshotMenuViewDidSelectedPasterMaterial:(ScreenshotMenuView*)screenshotMenuView{
     [[PasterSelectView defaultView] showInView:self.view result:^(PasterInfo * _Nullable pasterInfo, NSError * _Nullable error) {
         
+        UIImage *image = [UIImage imageNamed:pasterInfo.icon];
+        CGFloat scale = image.size.width / image.size.height;
+        ScreenshotPasterView *pasterView = [[ScreenshotPasterView alloc] initWithFrame:CGRectMake(40, 60, image.size.width * 0.7, image.size.width / scale * 0.7)];
+        [pasterView setImageList:@[image] imageDuration:0];
+        [self.screenshotPreview addSubview:pasterView];
+        [self.materialArray addObject:pasterView];
+        [self.materialArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if([obj isEqual:pasterView] == NO){
+                [obj setIsEditing:NO];
+            }
+            
+        }];
     }];
 }
 - (void)screenshotMenuViewShare:(ScreenshotMenuView*)screenshotMenuView{
@@ -137,12 +151,42 @@
         [self.materialArray removeObjectAtIndex:0];
     }
 }
+#pragma mark - BackgroundFuctionPanelViewDelegate <NSObject>
+
+- (void)backgroundFuctionPanelViewDidColorClicked:(BackgroundFuctionPanelView*)functionPanelView{
+    [[ColorSelectedView defaultView] showInView:self.view result:^(ColorInfo * _Nullable colorInfo, UIColor * _Nullable color, NSError * _Nullable error) {
+        if (error == nil) {
+            [self.screenshotPreview setBackgroundColor:color];
+        }
+    }];
+}
+
+- (void)backgroundFuctionPanelViewDidImageClicked:(BackgroundFuctionPanelView*)functionPanelView{
+    
+    ZYQAssetPickerController *pickerController = [[ZYQAssetPickerController alloc] init];
+    pickerController.maximumNumberOfSelection = 1;
+    pickerController.assetsFilter = ZYQAssetsFilterAllAssets;
+    pickerController.showEmptyGroups=NO;
+    pickerController.delegate=self;
+    [self presentViewController:pickerController animated:YES completion:nil];
+    
+}
+#pragma mark - ScreenshotPasterViewDelegate <NSObject>
+- (void)onPasterViewTap{
+    
+}
+- (void)onRemovePasterView:(ScreenshotPasterView*)pasterView{
+    [self.materialArray removeObject:pasterView];
+}
+
 #pragma mark - ScreenshotTextFieldDelegate
 - (void)onEditing:(ScreenshotTextFiled*)screenshotTextFiled{
     [self.materialArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (![obj isEqual:screenshotTextFiled]) {
             [obj setIsEditing:NO];
-            [obj resignFirstResponser];
+            if ([obj isKindOfClass:[ScreenshotTextFiled class]]) {
+                [obj resignFirstResponser];
+            }
         }
     }];
 }

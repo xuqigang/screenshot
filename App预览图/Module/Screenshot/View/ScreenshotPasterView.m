@@ -14,7 +14,7 @@
     UIView*         _borderView;                //用来显示边框或样式背景
     UIButton*       _deleteBtn;                 //删除铵钮
     UIButton*       _scaleRotateBtn;            //单手操作放大，旋转按钮
-    
+    UILabel*        _rotateAngleLabel;            //旋转角度
     CGRect          _initFrame;
 }
 
@@ -35,18 +35,33 @@
         
         _borderView = [UIView new];
         _borderView.layer.borderWidth = 1;
-        _borderView.layer.borderColor = UIColorFromRGB(0x0accac).CGColor;
+        _borderView.layer.borderColor = ThemeColor.CGColor;
         _borderView.userInteractionEnabled = YES;
         _borderView.backgroundColor = [UIColor clearColor];
         [self addSubview:_borderView];
     
+        _rotateAngleLabel = [UILabel new];
+        _rotateAngleLabel.text = @"0";
+        _rotateAngleLabel.textColor = ThemeColor;
+        _rotateAngleLabel.font = [UIFont systemFontOfSize:14];
+        _rotateAngleLabel.numberOfLines = 1;
+        _rotateAngleLabel.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:_rotateAngleLabel];
+        
         _deleteBtn = [UIButton new];
-        [_deleteBtn setImage:[UIImage imageNamed:@"videotext_delete"] forState:UIControlStateNormal];
+        UIFont *font = [UIFont fontAwesomeFontOfSize:14];
+        NSString *deleteTitle = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-times-circle"];
+        _deleteBtn.titleLabel.font = font;
+        [_deleteBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
+        [_deleteBtn setTitle:deleteTitle forState:UIControlStateNormal];
         [_deleteBtn addTarget:self action:@selector(onDeleteBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_deleteBtn];
         
         _scaleRotateBtn = [UIButton new];
-        [_scaleRotateBtn setImage:[UIImage imageNamed:@"videotext_rotate"] forState:UIControlStateNormal];
+        NSString *rotateTitle = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-repeat"];
+        _scaleRotateBtn.titleLabel.font = font;
+        [_scaleRotateBtn setTitle:rotateTitle forState:UIControlStateNormal];
+        [_scaleRotateBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
         UIPanGestureRecognizer* panGensture = [[UIPanGestureRecognizer alloc] initWithTarget:self action: @selector (handlePanSlide:)];
         [self addSubview:_scaleRotateBtn];
         [_scaleRotateBtn addGestureRecognizer:panGensture];
@@ -82,10 +97,12 @@
     _borderView.center = center;
 
     _pasterImageView.frame = CGRectMake(0, 0, _borderView.bounds.size.width, _borderView.bounds.size.height);
-
     _deleteBtn.center = CGPointMake(_borderView.x, _borderView.y);
     _deleteBtn.bounds = CGRectMake(0, 0, 50, 50);
 
+    _rotateAngleLabel.center = CGPointMake(_borderView.x, _borderView.bottom);
+    _rotateAngleLabel.bounds = CGRectMake(0, 0, 50, 50);
+    
     _scaleRotateBtn.center = CGPointMake(_borderView.right, _borderView.bottom);
     _scaleRotateBtn.bounds = CGRectMake(0, 0, 50, 50);
 }
@@ -103,7 +120,18 @@
         self.height = self.width * (_pasterImageView.image.size.height / _pasterImageView.image.size.width);
     }
 }
-
+- (void)setIsEditing:(BOOL)isEditing{
+    _isEditing = isEditing;
+    if (isEditing) {
+        _borderView.layer.borderColor = ThemeColor.CGColor;
+    } else {
+        _borderView.layer.borderColor = UIColor.clearColor.CGColor;
+    }
+    _deleteBtn.hidden = !isEditing;
+//    _styleBtn.hidden = !isEditing;
+    _scaleRotateBtn.hidden = !isEditing;
+    _rotateAngleLabel.hidden = !isEditing;
+}
 
 - (CGRect)pasterFrameOnView:(UIView *)view
 {
@@ -123,11 +151,15 @@
 #pragma mark - GestureRecognizer handle
 - (void)onTap:(UITapGestureRecognizer*)recognizer
 {
+    [self setIsEditing:YES];
     [self.delegate onPasterViewTap];
 }
 
 - (void)handlePanSlide:(UIPanGestureRecognizer*)recognizer
 {
+    if(self.isEditing == NO){
+        return;
+    }
     //拖动
     if (recognizer.view == self) {
         CGPoint translation = [recognizer translationInView:self.superview];
@@ -177,6 +209,7 @@
         
         self.transform = CGAffineTransformRotate(self.transform, angle);
         _rotateAngle += angle;
+        _rotateAngleLabel.text = [NSString stringWithFormat:@"%.0lf°",_rotateAngle * (180.0 / M_PI)];
     }
     
 }

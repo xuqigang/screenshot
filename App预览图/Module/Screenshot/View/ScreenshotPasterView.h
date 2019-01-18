@@ -18,6 +18,7 @@
 @property (nonatomic, strong)    UIImageView *pasterImageView;
 @property (nonatomic, assign)    CGFloat   rotateAngle;
 @property (nonatomic, assign)    UIImage*  staticImage;
+@property (nonatomic, assign) BOOL isEditing;  //正在编辑
 - (void)setImageList:(NSArray<UIImage*> *)imageList imageDuration:(float)duration;
 - (CGRect)pasterFrameOnView:(UIView*)view;
 @end

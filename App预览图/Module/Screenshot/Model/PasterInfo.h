@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PasterInfo : NSObject
-
+@property (nonatomic, assign) NSInteger id;
+@property (nonatomic, strong) NSString *icon;
 @end
 
 NS_ASSUME_NONNULL_END

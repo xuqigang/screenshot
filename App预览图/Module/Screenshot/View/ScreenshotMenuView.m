@@ -39,13 +39,18 @@
 }
 
 - (void)backgroundMenuClicked:(UIGestureRecognizer*)ges{
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(screenshotMenuViewDidSelectedBackground:)]) {
+        [self.delegate screenshotMenuViewDidSelectedBackground:self];
+    }
+    return;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     UIAlertAction *backgroundColor = [UIAlertAction actionWithTitle:@"设置背景色" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if(self.delegate && [self.delegate respondsToSelector:@selector(screenshotMenuViewDidSelectedBackgroundColor:)]){
-            [self.delegate screenshotMenuViewDidSelectedBackgroundColor:self];
+//            [self.delegate screenshotMenuViewDidSelectedBackgroundColor:self];
         }
     }];
     UIAlertAction *addBackgroundImage = [UIAlertAction actionWithTitle:@"添加背景图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

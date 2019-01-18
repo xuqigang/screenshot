@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="videotext_delete" translatesAutoresizingMaskIntoConstraints="NO" id="0Va-hB-Jn9">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Va-hB-Jn9">
                         <rect key="frame" x="5" y="5" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="0Va-hB-Jn9" secondAttribute="height" id="uk3-e2-Lf1"/>
@@ -33,9 +33,12 @@
                 <constraint firstAttribute="bottom" secondItem="0Va-hB-Jn9" secondAttribute="bottom" constant="5" id="zuz-pB-SQq"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="iconImageView" destination="0Va-hB-Jn9" id="qHg-A3-3rC"/>
+            </connections>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="videotext_delete" width="15" height="15"/>
+        <image name="success.png" width="28" height="28"/>
     </resources>
 </document>

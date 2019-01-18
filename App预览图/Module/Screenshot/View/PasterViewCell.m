@@ -8,11 +8,22 @@
 
 #import "PasterViewCell.h"
 
+@interface PasterViewCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+
+@end
+
 @implementation PasterViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
+- (void)setupCellData:(PasterInfo*_Nullable)cellData{
+    if (cellData) {
+        self.iconImageView.image = [UIImage imageNamed:cellData.icon];
+    } else {
+        self.iconImageView.image = nil;
+    }
+}
 @end
