@@ -12,7 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TemplateParameter : NSObject
 
-@property (nonatomic, assign) CGFloat shellTopScale;
+@property (nonatomic, strong) NSString *previewIcon;
+@property (nonatomic, assign) CGFloat shellTopScale;  //手机壳的位置比例
+@property (nonatomic, strong) NSString * shellImage;  //手机壳对应的图片
+
 
 @end
 

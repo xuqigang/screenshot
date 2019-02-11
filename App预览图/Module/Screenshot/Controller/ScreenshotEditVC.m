@@ -104,9 +104,6 @@
 - (void)screenshotMenuViewDidSelectedBackground:(ScreenshotMenuView*)screenshotMenuView{
     [self.backgroundFuctionPanelView showInView:self.view];
 }
-- (void)screenshotMenuViewDidDeleteBackgroundImage:(ScreenshotMenuView*)screenshotMenuView{
-    [self.screenshotPreview setBackgroundImage:nil];
-}
 - (void)screenshotMenuViewDidSelectedTextMaterial:(ScreenshotMenuView*)screenshotMenuView{
     
     CGFloat y = arc4random() % 100 + 60;
@@ -142,13 +139,32 @@
     }];
 }
 - (void)screenshotMenuViewShare:(ScreenshotMenuView*)screenshotMenuView{
-    
+    [self.screenshotPreview generateScreenshotImageCallback:^(UIImage * _Nonnull image) {
+        
+        //在这里呢 如果想分享图片 就把图片添加进去  文字什么的通上
+        NSArray *activityItems = @[image];
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+        //不出现在活动项目
+        activityVC.excludedActivityTypes = @[UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
+        [self presentViewController:activityVC animated:YES completion:nil];
+        // 分享之后的回调
+        activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+            if (completed) {
+                [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                //分享 成功
+            } else  {
+                [SVProgressHUD showErrorWithStatus:@"分享失败"];
+                //分享 取消
+            }
+        };
+        
+    }];
 }
 - (void)screenshotMenuViewRevoke:(ScreenshotMenuView*)screenshotMenuView{
     if ([self.materialArray count] > 0) {
-        id view = [self.materialArray objectAtIndex:0];
+        id view = [self.materialArray lastObject];
         [view removeFromSuperview];
-        [self.materialArray removeObjectAtIndex:0];
+        [self.materialArray removeLastObject];
     }
 }
 #pragma mark - BackgroundFuctionPanelViewDelegate <NSObject>

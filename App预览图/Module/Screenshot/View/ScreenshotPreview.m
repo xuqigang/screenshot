@@ -31,10 +31,16 @@
 - (UIImage*)shellImage{
     return self.shellImage;
 }
+- (void)setShellTopScale:(CGFloat)shellTopScale{
+    _shellTopScale = shellTopScale;
+    [self setNeedsLayout];
+}
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.shellTopConstraint.constant = (self.frame.size.height - self.shellImageView.frame.size.height) * 0.75;
+    self.shellTopConstraint.constant = (self.frame.size.height - self.shellImageView.frame.size.height) * self.shellTopScale;
 }
+
+
 - (void)generateScreenshotImageCallback:(void(^)(UIImage*image))callback{
     dispatch_async(dispatch_get_main_queue(), ^{
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);

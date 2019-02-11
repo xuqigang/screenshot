@@ -76,10 +76,8 @@
 
         UIRotationGestureRecognizer* rotateGensture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotate:)];
         [self addGestureRecognizer:rotateGensture];
-
-        
         _rotateAngle = 0.f;
-        
+        self.isEditing = YES;
     }
     
     return self;
@@ -217,6 +215,9 @@
 //双手指放大
 - (void)handlePinch:(UIPinchGestureRecognizer*)recognizer
 {
+    if (self.isEditing == NO) {
+        return;
+    }
     self.bounds = CGRectMake(0, 0, self.bounds.size.width * recognizer.scale, self.bounds.size.height * recognizer.scale);
     recognizer.scale = 1;
 }
@@ -224,6 +225,9 @@
 ////双手指旋转
 - (void)handleRotate:(UIRotationGestureRecognizer*)recognizer
 {
+    if (self.isEditing == NO) {
+        return;
+    }
     recognizer.view.transform = CGAffineTransformRotate(recognizer.view.transform, recognizer.rotation);
 
     _rotateAngle += recognizer.rotation;

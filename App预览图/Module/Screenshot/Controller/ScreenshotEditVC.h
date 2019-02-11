@@ -7,10 +7,12 @@
 //
 
 #import "XMBaseVC.h"
-
+#import "TemplateParameter.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ScreenshotEditVC : XMBaseVC
+
+@property (nonatomic, strong) TemplateParameter *templateParameter;
 
 @end
 

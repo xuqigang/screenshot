@@ -207,10 +207,15 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="backgroundIconLabel" destination="gzQ-Sd-NsG" id="Xix-3Q-Ugy"/>
                 <outlet property="backgroundMenuView" destination="JfJ-sm-dtw" id="NOI-d3-Jvb"/>
+                <outlet property="pasterIconLabel" destination="vhI-fv-6hP" id="1Ku-Zg-gUs"/>
                 <outlet property="pasterMenuView" destination="8o7-en-VXU" id="L6X-LQ-Sfz"/>
+                <outlet property="revokeIconLabel" destination="OVY-0f-tB6" id="IYk-S5-g0h"/>
                 <outlet property="revokeMenuView" destination="jhN-NZ-DRi" id="jQH-tc-jLk"/>
+                <outlet property="shareIconLabel" destination="ZRC-Qw-Ymz" id="6XB-1h-xJI"/>
                 <outlet property="shareMenuView" destination="hvH-RX-CNy" id="yzX-mQ-zLU"/>
+                <outlet property="textIconLabel" destination="NbB-qj-Oif" id="det-x0-lxG"/>
                 <outlet property="textMenuView" destination="qUU-cc-DAD" id="UPW-Ke-kJr"/>
             </connections>
             <point key="canvasLocation" x="55.200000000000003" y="122.78860569715144"/>

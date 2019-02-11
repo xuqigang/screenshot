@@ -14,6 +14,11 @@
 @property (weak, nonatomic) IBOutlet UIView *pasterMenuView;
 @property (weak, nonatomic) IBOutlet UIView *shareMenuView;
 @property (weak, nonatomic) IBOutlet UIView *revokeMenuView;
+@property (weak, nonatomic) IBOutlet UILabel *backgroundIconLabel;
+@property (weak, nonatomic) IBOutlet UILabel *textIconLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pasterIconLabel;
+@property (weak, nonatomic) IBOutlet UILabel *shareIconLabel;
+@property (weak, nonatomic) IBOutlet UILabel *revokeIconLabel;
 
 @end
 
@@ -21,10 +26,34 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
+    [self setupUI];
     [self addGesture];
    
 }
+- (void)setupUI{
+    
+    UIFont *font = [UIFont fontAwesomeFontOfSize:15];
+    self.backgroundIconLabel.font = font;
+    NSString *backgroundIconStr = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-square"];
+    self.backgroundIconLabel.text = backgroundIconStr;
+    
+    self.textIconLabel.font = font;
+    NSString *textIconStr = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-pencil"];
+    self.textIconLabel.text = textIconStr;
+    
+    self.pasterIconLabel.font = font;
+    NSString *pasterIconStr = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-magic"];
+    self.pasterIconLabel.text = pasterIconStr;
+    
+    self.shareIconLabel.font = font;
+    NSString *shareIconStr = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-share-square-o"];
+    self.shareIconLabel.text = shareIconStr;
+    
+    self.revokeIconLabel.font = font;
+    NSString *revokeIconStr = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-reply"];
+    self.revokeIconLabel.text = revokeIconStr;
 
+}
 - (void)addGesture{
     UITapGestureRecognizer *backgroundTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundMenuClicked:)];
     [self.backgroundMenuView addGestureRecognizer:backgroundTap];
@@ -42,34 +71,6 @@
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(screenshotMenuViewDidSelectedBackground:)]) {
         [self.delegate screenshotMenuViewDidSelectedBackground:self];
-    }
-    return;
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    UIAlertAction *backgroundColor = [UIAlertAction actionWithTitle:@"设置背景色" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if(self.delegate && [self.delegate respondsToSelector:@selector(screenshotMenuViewDidSelectedBackgroundColor:)]){
-//            [self.delegate screenshotMenuViewDidSelectedBackgroundColor:self];
-        }
-    }];
-    UIAlertAction *addBackgroundImage = [UIAlertAction actionWithTitle:@"添加背景图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if(self.delegate && [self.delegate respondsToSelector:@selector(screenshotMenuViewDidSelectedBackgroundImage:)]){
-            [self.delegate screenshotMenuViewDidSelectedBackgroundImage:self];
-        }
-    }];
-    UIAlertAction *deleteBackgroundImage = [UIAlertAction actionWithTitle:@"清除背景图" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        if(self.delegate && [self.delegate respondsToSelector:@selector(screenshotMenuViewDidDeleteBackgroundImage:)]){
-            [self.delegate screenshotMenuViewDidDeleteBackgroundImage:self];
-        }
-    }];
-    [alert addAction:backgroundColor];
-    [alert addAction:addBackgroundImage];
-    [alert addAction:deleteBackgroundImage];
-    [alert addAction:cancle];
-    if (self.delegate && [self.delegate isKindOfClass:[UIViewController class]]) {
-        UIViewController *vc = (UIViewController*)self.delegate;
-         [vc presentViewController:alert animated:YES completion:nil];
     }
 }
 

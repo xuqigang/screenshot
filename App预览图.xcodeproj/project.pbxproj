@@ -12,6 +12,11 @@
 		7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B02C33321E10A0F00CB7574 /* TextStyleEditView.xib */; };
 		7B230BA321E3410A006F7B5B /* ScreenshotPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B230BA121E3410A006F7B5B /* ScreenshotPreviewVC.m */; };
 		7B230BA421E3410A006F7B5B /* ScreenshotPreviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B230BA221E3410A006F7B5B /* ScreenshotPreviewVC.xib */; };
+		7B5BC1032211664800D6A6A9 /* TemplateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BC1012211664800D6A6A9 /* TemplateCell.m */; };
+		7B5BC1042211664800D6A6A9 /* TemplateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BC1022211664800D6A6A9 /* TemplateCell.xib */; };
+		7B5BC10A2211671E00D6A6A9 /* TemplateGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BC1092211671E00D6A6A9 /* TemplateGroupModel.m */; };
+		7B5BC10E22116A7500D6A6A9 /* TemplateGroupReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BC10C22116A7500D6A6A9 /* TemplateGroupReusableView.m */; };
+		7B5BC10F22116A7500D6A6A9 /* TemplateGroupReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BC10D22116A7500D6A6A9 /* TemplateGroupReusableView.xib */; };
 		7B6BBB8121E4A7B8002E1406 /* PasterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6BBB7F21E4A7B8002E1406 /* PasterViewCell.m */; };
 		7B6BBB8221E4A7B8002E1406 /* PasterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6BBB8021E4A7B8002E1406 /* PasterViewCell.xib */; };
 		7B6BBB8521E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6BBB8421E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m */; };
@@ -94,6 +99,14 @@
 		7B230BA021E3410A006F7B5B /* ScreenshotPreviewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenshotPreviewVC.h; sourceTree = "<group>"; };
 		7B230BA121E3410A006F7B5B /* ScreenshotPreviewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenshotPreviewVC.m; sourceTree = "<group>"; };
 		7B230BA221E3410A006F7B5B /* ScreenshotPreviewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotPreviewVC.xib; sourceTree = "<group>"; };
+		7B5BC1002211664800D6A6A9 /* TemplateCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TemplateCell.h; sourceTree = "<group>"; };
+		7B5BC1012211664800D6A6A9 /* TemplateCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TemplateCell.m; sourceTree = "<group>"; };
+		7B5BC1022211664800D6A6A9 /* TemplateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TemplateCell.xib; sourceTree = "<group>"; };
+		7B5BC1082211671E00D6A6A9 /* TemplateGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TemplateGroupModel.h; sourceTree = "<group>"; };
+		7B5BC1092211671E00D6A6A9 /* TemplateGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TemplateGroupModel.m; sourceTree = "<group>"; };
+		7B5BC10B22116A7500D6A6A9 /* TemplateGroupReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TemplateGroupReusableView.h; sourceTree = "<group>"; };
+		7B5BC10C22116A7500D6A6A9 /* TemplateGroupReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TemplateGroupReusableView.m; sourceTree = "<group>"; };
+		7B5BC10D22116A7500D6A6A9 /* TemplateGroupReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TemplateGroupReusableView.xib; sourceTree = "<group>"; };
 		7B6BBB7E21E4A7B8002E1406 /* PasterViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasterViewCell.h; sourceTree = "<group>"; };
 		7B6BBB7F21E4A7B8002E1406 /* PasterViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasterViewCell.m; sourceTree = "<group>"; };
 		7B6BBB8021E4A7B8002E1406 /* PasterViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasterViewCell.xib; sourceTree = "<group>"; };
@@ -437,6 +450,12 @@
 		7BF4266A21DDA20F001920AA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B5BC1002211664800D6A6A9 /* TemplateCell.h */,
+				7B5BC1012211664800D6A6A9 /* TemplateCell.m */,
+				7B5BC1022211664800D6A6A9 /* TemplateCell.xib */,
+				7B5BC10B22116A7500D6A6A9 /* TemplateGroupReusableView.h */,
+				7B5BC10C22116A7500D6A6A9 /* TemplateGroupReusableView.m */,
+				7B5BC10D22116A7500D6A6A9 /* TemplateGroupReusableView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -444,6 +463,8 @@
 		7BF4266B21DDA21A001920AA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7B5BC1082211671E00D6A6A9 /* TemplateGroupModel.h */,
+				7B5BC1092211671E00D6A6A9 /* TemplateGroupModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -648,6 +669,7 @@
 				7BF4267621DDFA3B001920AA /* ScreenshotPreview.xib in Resources */,
 				7B230BA421E3410A006F7B5B /* ScreenshotPreviewVC.xib in Resources */,
 				7BF425B021DD9DD7001920AA /* Main.storyboard in Resources */,
+				7B5BC1042211664800D6A6A9 /* TemplateCell.xib in Resources */,
 				7BF4265021DD9E5A001920AA /* buzhou01.png in Resources */,
 				7BF9EFBB21F1D7A000BEF024 /* TemplateScreenshotVC.xib in Resources */,
 				7BF4268B21DE1185001920AA /* 1111_03.png in Resources */,
@@ -655,6 +677,7 @@
 				7BF4265221DD9E5A001920AA /* buzhou04.png in Resources */,
 				7BE9D2AD21DF42FE00C9C3D5 /* ColorSelectedView.xib in Resources */,
 				7BF9EFB421F1AF5000BEF024 /* BackgroundFuctionPanelView.xib in Resources */,
+				7B5BC10F22116A7500D6A6A9 /* TemplateGroupReusableView.xib in Resources */,
 				7BE9D2A321DEFB0C00C9C3D5 /* 0x0ss-3.jpg in Resources */,
 				7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */,
 				7BF4265121DD9E5A001920AA /* buzhou05.png in Resources */,
@@ -733,6 +756,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B5BC10E22116A7500D6A6A9 /* TemplateGroupReusableView.m in Sources */,
 				7BB1143721E4A09A007668E1 /* PasterInfo.m in Sources */,
 				7B230BA321E3410A006F7B5B /* ScreenshotPreviewVC.m in Sources */,
 				7BF4265C21DD9E5A001920AA /* AssignToObject.m in Sources */,
@@ -741,6 +765,7 @@
 				7BF9EFB321F1AF5000BEF024 /* BackgroundFuctionPanelView.m in Sources */,
 				7BF4266321DD9E5A001920AA /* NSString+utils.m in Sources */,
 				7BF9EFBA21F1D7A000BEF024 /* TemplateScreenshotVC.m in Sources */,
+				7B5BC1032211664800D6A6A9 /* TemplateCell.m in Sources */,
 				7BF4268621DE0D85001920AA /* ScreenshotPasterView.m in Sources */,
 				7B6BBB8521E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m in Sources */,
 				7BF4265D21DD9E5A001920AA /* SBJson.m in Sources */,
@@ -765,6 +790,7 @@
 				7BF4268321DE0B50001920AA /* UIView+Additions.m in Sources */,
 				7BE67C5621E0625F00CD7F81 /* QGDBManager.m in Sources */,
 				7BF9EFBF21F1D7F500BEF024 /* TemplateParameter.m in Sources */,
+				7B5BC10A2211671E00D6A6A9 /* TemplateGroupModel.m in Sources */,
 				7BF4265A21DD9E5A001920AA /* UIView+frame.m in Sources */,
 				7BF4268921DE0DAF001920AA /* ScreenshotTextFiled.m in Sources */,
 				7BB035EE21E2577C00DDBE56 /* TextStyleParameter.m in Sources */,
