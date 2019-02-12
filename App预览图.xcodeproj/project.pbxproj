@@ -21,6 +21,10 @@
 		7B6BBB8221E4A7B8002E1406 /* PasterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6BBB8021E4A7B8002E1406 /* PasterViewCell.xib */; };
 		7B6BBB8521E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6BBB8421E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m */; };
 		7B70E18C21F05818003A3392 /* pasters.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B70E18B21F05818003A3392 /* pasters.json */; };
+		7B88EA21221262B5003C9FB3 /* liveroom.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B88EA20221262B5003C9FB3 /* liveroom.png */; };
+		7B88EA2422126502003C9FB3 /* TextPatameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B88EA2322126502003C9FB3 /* TextPatameter.m */; };
+		7B88EA2722126518003C9FB3 /* PasterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B88EA2622126518003C9FB3 /* PasterParameter.m */; };
+		7B88EA292212CE5D003C9FB3 /* newscreenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B88EA282212CE5C003C9FB3 /* newscreenshot.png */; };
 		7BA70F2C21DF94F900D1D1DC /* UIColor+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */; };
 		7BB035EE21E2577C00DDBE56 /* TextStyleParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB035ED21E2577C00DDBE56 /* TextStyleParameter.m */; };
 		7BB1143221E49AA1007668E1 /* PasterSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB1143121E49AA1007668E1 /* PasterSelectView.m */; };
@@ -113,6 +117,12 @@
 		7B6BBB8321E4AB4E002E1406 /* ILGCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILGCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		7B6BBB8421E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILGCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		7B70E18B21F05818003A3392 /* pasters.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pasters.json; sourceTree = "<group>"; };
+		7B88EA20221262B5003C9FB3 /* liveroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liveroom.png; sourceTree = "<group>"; };
+		7B88EA2222126502003C9FB3 /* TextPatameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextPatameter.h; sourceTree = "<group>"; };
+		7B88EA2322126502003C9FB3 /* TextPatameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextPatameter.m; sourceTree = "<group>"; };
+		7B88EA2522126518003C9FB3 /* PasterParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasterParameter.h; sourceTree = "<group>"; };
+		7B88EA2622126518003C9FB3 /* PasterParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasterParameter.m; sourceTree = "<group>"; };
+		7B88EA282212CE5C003C9FB3 /* newscreenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newscreenshot.png; sourceTree = "<group>"; };
 		7BA70F2A21DF94F900D1D1DC /* UIColor+utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+utils.h"; sourceTree = "<group>"; };
 		7BA70F2B21DF94F900D1D1DC /* UIColor+utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+utils.m"; sourceTree = "<group>"; };
 		7BB035EC21E2577C00DDBE56 /* TextStyleParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextStyleParameter.h; sourceTree = "<group>"; };
@@ -364,7 +374,9 @@
 				7BF4268A21DE1185001920AA /* 1111_03.png */,
 				7BF4260D21DD9E5A001920AA /* buzhou04.png */,
 				7BE9D2A221DEFB0C00C9C3D5 /* 0x0ss-3.jpg */,
+				7B88EA20221262B5003C9FB3 /* liveroom.png */,
 				7B70E18B21F05818003A3392 /* pasters.json */,
+				7B88EA282212CE5C003C9FB3 /* newscreenshot.png */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -578,6 +590,10 @@
 			children = (
 				7BF9EFBD21F1D7F500BEF024 /* TemplateParameter.h */,
 				7BF9EFBE21F1D7F500BEF024 /* TemplateParameter.m */,
+				7B88EA2222126502003C9FB3 /* TextPatameter.h */,
+				7B88EA2322126502003C9FB3 /* TextPatameter.m */,
+				7B88EA2522126518003C9FB3 /* PasterParameter.h */,
+				7B88EA2622126518003C9FB3 /* PasterParameter.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -679,9 +695,11 @@
 				7BF9EFB421F1AF5000BEF024 /* BackgroundFuctionPanelView.xib in Resources */,
 				7B5BC10F22116A7500D6A6A9 /* TemplateGroupReusableView.xib in Resources */,
 				7BE9D2A321DEFB0C00C9C3D5 /* 0x0ss-3.jpg in Resources */,
+				7B88EA292212CE5D003C9FB3 /* newscreenshot.png in Resources */,
 				7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */,
 				7BF4265121DD9E5A001920AA /* buzhou05.png in Resources */,
 				7BF4264F21DD9E5A001920AA /* buzhou02.png in Resources */,
+				7B88EA21221262B5003C9FB3 /* liveroom.png in Resources */,
 				7B6BBB8221E4A7B8002E1406 /* PasterViewCell.xib in Resources */,
 				7BE9D2A821DEFE3F00C9C3D5 /* ScreenshotMenuView.xib in Resources */,
 				7BB1143421E49AAD007668E1 /* PasterSelectView.xib in Resources */,
@@ -764,6 +782,7 @@
 				7BF4263921DD9E5A001920AA /* XMBaseView.m in Sources */,
 				7BF9EFB321F1AF5000BEF024 /* BackgroundFuctionPanelView.m in Sources */,
 				7BF4266321DD9E5A001920AA /* NSString+utils.m in Sources */,
+				7B88EA2422126502003C9FB3 /* TextPatameter.m in Sources */,
 				7BF9EFBA21F1D7A000BEF024 /* TemplateScreenshotVC.m in Sources */,
 				7B5BC1032211664800D6A6A9 /* TemplateCell.m in Sources */,
 				7BF4268621DE0D85001920AA /* ScreenshotPasterView.m in Sources */,
@@ -780,6 +799,7 @@
 				7BF4263F21DD9E5A001920AA /* NSMutableAttributedString+FontAwesome.m in Sources */,
 				7BF4265921DD9E5A001920AA /* UIView+utils.m in Sources */,
 				7BF4265E21DD9E5A001920AA /* UIScrollView+blankView.m in Sources */,
+				7B88EA2722126518003C9FB3 /* PasterParameter.m in Sources */,
 				7BE67C5321E060A200CD7F81 /* ColorInfo.m in Sources */,
 				7BE9D2AB21DF42F300C9C3D5 /* ColorSelectedView.m in Sources */,
 				7BB1143221E49AA1007668E1 /* PasterSelectView.m in Sources */,

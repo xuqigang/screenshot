@@ -229,6 +229,10 @@
     _scaleRotateBtn.hidden = !isEditing;
     _rotateAngleLabel.hidden = !isEditing;
 }
+
+- (void)setText:(NSString *)text{
+    _textLabel.text = text;
+}
 - (NSString*)text
 {
     return _textLabel.text;

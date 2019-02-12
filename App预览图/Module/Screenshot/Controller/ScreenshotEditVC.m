@@ -36,6 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+    [self setupScreenshotParameter];
     // Do any additional setup after loading the view from its nib.
 }
 - (void)setupUI{
@@ -44,6 +45,30 @@
     [self setRightSecondButtonText:@"预览"];
     [self.view addSubview:self.screenshotPreview];
     [self.view addSubview:self.screenshotMenuView];
+}
+- (void)setupScreenshotParameter{
+    self.screenshotPreview.backgroundImage = [UIImage imageNamed:self.templateParameter.backgroundImage];
+    self.screenshotPreview.backgroundColor = self.templateParameter.backgroundColor;
+    self.screenshotPreview.shellImage = [UIImage imageNamed:self.templateParameter.shellImage];
+    self.screenshotPreview.screenshotImage = self.templateParameter.screenshotImage;
+    self.screenshotPreview.shellTopScale = self.templateParameter.shellTopScale;
+    self.screenshotPreview.screenshotType = self.templateParameter.screenshotType;
+//    [self.templateParameter.textPatameters enumerateObjectsUsingBlock:^(TextPatameter * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        CGFloat y = arc4random() % 100 + 60;
+//        CGFloat x = arc4random() % 100 + 20;
+//        ScreenshotTextFiled *textField = [[ScreenshotTextFiled alloc] initWithFrame:CGRectMake(x, y, 0, 0)];
+//        textField.delegate = self;
+//        textField.textLabel.text = obj.text;
+//        textField.textLabel.font = obj.font;
+//        textField.textLabel.textColor = obj.textColor;
+//        textField.textLabel.backgroundColor = obj.backgroundColor;
+//        [self.screenshotPreview addSubview:textField];
+//        [textField updatePosition];
+//        [textField setIsEditing:NO];
+//        [self.materialArray addObject:textField];
+//    }];
+//    
+    
 }
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
@@ -55,7 +80,7 @@
     }
     
     CGFloat screenshotPreviewHeight = self.view.xm_height - topHeight - bottomHeight - 80;
-    CGFloat screenshotPreviewWidth = screenshotPreviewHeight * (9/16.0);
+    CGFloat screenshotPreviewWidth = screenshotPreviewHeight * self.templateParameter.screenshotScale;
     self.screenshotPreview.frame = CGRectMake((self.view.xm_width - screenshotPreviewWidth)/2.0, topHeight + 40,screenshotPreviewWidth , screenshotPreviewHeight);
     self.screenshotMenuView.frame = CGRectMake(0, self.view.xm_height - bottomHeight, self.view.xm_width, bottomHeight);
 }
@@ -81,6 +106,16 @@
     }
     return _backgroundFuctionPanelView;
 }
+
+- (TemplateParameter*)templateParameter{
+    if (!_templateParameter) {
+        _templateParameter = [[TemplateParameter alloc] init];
+        _templateParameter.shellTopScale = 0.75;
+        _templateParameter.shellImage = @"shell_iPhonePlus";
+    }
+    return _templateParameter;
+}
+    
 #pragma mark - 父类
 - (void)rightButtonClicked:(UIButton *)button //需要时，在子类重写
 {

@@ -11,7 +11,9 @@
 #import "TemplateCell.h"
 #import "TemplateGroupModel.h"
 #import "TemplateGroupReusableView.h"
-@interface HomeVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
+#import "ZYQAssetPickerController.h"
+#import <objc/runtime.h>
+@interface HomeVC ()<UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,ZYQAssetPickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstrint;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *templateGroupParameters;
@@ -32,11 +34,60 @@
     TemplateGroupModel *group1 = [[TemplateGroupModel alloc] init];
     
     TemplateParameter *temlate1 = [[TemplateParameter alloc] init];
+    temlate1.shellTopScale = 0.75;
+    temlate1.screenshotType = ScreenshotType_Plus;
+    temlate1.screenshotScale = 1242/2208.0;
+    temlate1.shellImage = @"iphone6plus-spacegray";
+    temlate1.backgroundColor = [UIColor orangeColor];
+    temlate1.backgroundImage = nil;
+    TextPatameter *textPatameter1 = [TextPatameter new];
+    textPatameter1.text = @"点击这里输入标题";
+    textPatameter1.font = [UIFont systemFontOfSize:25];
+    textPatameter1.textColor = [UIColor blackColor];
+    textPatameter1.position = CGPointMake(0, 10);
+    textPatameter1.backgroundColor = [UIColor clearColor];
+    TextPatameter *textPatameter2 = [TextPatameter new];
+    textPatameter2.text = @"点击这里输入副标题";
+    textPatameter2.font = [UIFont systemFontOfSize:16];
+    textPatameter2.textColor = [UIColor blackColor];
+    textPatameter2.position = CGPointMake(0, 40);
+    textPatameter2.backgroundColor = [UIColor clearColor];
+    temlate1.textPatameters = @[textPatameter1,textPatameter2];
+    TemplateParameter *temlate2 = [[TemplateParameter alloc] init];
+    temlate2.shellTopScale = 0.25;
+    temlate2.screenshotScale = 1242/2208.0;
+    temlate2.shellImage = @"iphone6plus-gold";
+    temlate2.backgroundColor = [UIColor orangeColor];
+    temlate2.backgroundImage = nil;
+    temlate2.screenshotType = ScreenshotType_Plus;
     
-    group1.list = @[temlate1,temlate1,temlate1];
+    TemplateParameter *temlate3 = [[TemplateParameter alloc] init];
+    temlate3.shellTopScale = 1.35;
+    temlate3.screenshotScale = 1242/2208.0;
+    temlate3.shellImage = @"iphone6plus-spacegray";
+    temlate3.backgroundColor = [UIColor orangeColor];
+    temlate3.backgroundImage = nil;
+    temlate3.screenshotType = ScreenshotType_Plus;
+    group1.list = @[temlate1,temlate2,temlate3];
     group1.title = @"iPhone plus 设备";
     TemplateGroupModel *group2 = [[TemplateGroupModel alloc] init];
-    group2.list = @[temlate1,temlate1,temlate1,temlate1,temlate1,temlate1];
+    
+    TemplateParameter *temlateX1 = [[TemplateParameter alloc] init];
+    temlateX1.shellTopScale = 0.25;
+    temlateX1.screenshotScale = 1125/2436.0;
+    temlateX1.shellImage = @"iPhoneX-spacegray";
+    temlateX1.backgroundColor = [UIColor orangeColor];
+    temlateX1.backgroundImage = nil;
+    temlateX1.screenshotType = ScreenshotType_X;
+    TemplateParameter *temlateX2 = [[TemplateParameter alloc] init];
+    temlateX2.shellTopScale = 0.75;
+    temlateX2.screenshotScale = 1125/2436.0;
+    temlateX2.shellImage = @"iPhoneX-spacegray";
+    temlateX2.backgroundColor = [UIColor orangeColor];
+    temlateX2.backgroundImage = nil;
+    temlateX2.screenshotType = ScreenshotType_X;
+    
+    group2.list = @[temlateX1,temlateX2,temlateX2,temlate1,temlate1,temlate1];
     group2.title = @"iPhone x 设备";
     [self.templateGroupParameters addObject:group1];
     [self.templateGroupParameters addObject:group2];
@@ -107,16 +158,31 @@
         TemplateGroupModel *groupInfo = [self.templateGroupParameters objectAtIndex:indexPath.section];
         if (indexPath.row < groupInfo.list.count) {
             TemplateParameter *template = [groupInfo.list objectAtIndex:indexPath.row];
-            ScreenshotEditVC *vc = [ScreenshotEditVC instanceFromNib];
-            vc.templateParameter = template;
-            PushViewController(vc);
+            ZYQAssetPickerController *pickerController = [[ZYQAssetPickerController alloc] init];
+            objc_setAssociatedObject(pickerController, "templateParameter", template, OBJC_ASSOCIATION_RETAIN);
+            pickerController.maximumNumberOfSelection = 1;
+            pickerController.assetsFilter = ZYQAssetsFilterAllAssets;
+            pickerController.showEmptyGroups=NO;
+            pickerController.delegate=self;
+            [self presentViewController:pickerController animated:YES completion:nil];
         }
         
     } else {
         NSLog(@"元素索引有误");
     }
 }
-
+#pragma mark - ZYQAssetPickerControllerDelegate
+-(void)assetPickerController:(ZYQAssetPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
+    //设置图片背景
+    ZYQAsset *asset=[assets lastObject];
+    [asset setGetFullScreenImage:^(UIImage *result) {
+        TemplateParameter *template = objc_getAssociatedObject(picker, "templateParameter");
+        template.screenshotImage = result;
+        ScreenshotEditVC *vc = [ScreenshotEditVC instanceFromNib];
+        vc.templateParameter = template;
+        PushViewController(vc);
+    }];
+}
 
 //
 //- (IBAction)iPadButtonClicked:(UIButton *)sender {

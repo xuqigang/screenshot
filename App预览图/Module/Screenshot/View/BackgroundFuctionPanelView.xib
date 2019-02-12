@@ -23,27 +23,25 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ah7-nG-S9Q">
-                                    <rect key="frame" x="0.0" y="26.5" width="187.5" height="37"/>
-                                    <state key="normal" image="funcsixin"/>
+                                    <rect key="frame" x="0.0" y="28" width="187.5" height="34"/>
                                     <connections>
                                         <action selector="sixinButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="W9d-0m-mkb"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vRU-WD-z5z">
-                                    <rect key="frame" x="187.5" y="26.5" width="187.5" height="37"/>
-                                    <state key="normal" image="zhuanpan"/>
+                                    <rect key="frame" x="187.5" y="28" width="187.5" height="34"/>
                                     <connections>
                                         <action selector="lotteryDrawButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="nVT-8b-wrk"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="背景色" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yp-Kf-cXx">
-                                    <rect key="frame" x="72.5" y="75.5" width="43" height="17"/>
+                                    <rect key="frame" x="72.5" y="74" width="43" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="背景图" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcK-i6-Q0q">
-                                    <rect key="frame" x="260" y="75.5" width="43" height="17"/>
+                                    <rect key="frame" x="260" y="74" width="43" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -90,8 +88,4 @@
             <point key="canvasLocation" x="138.40000000000001" y="128.18590704647679"/>
         </view>
     </objects>
-    <resources>
-        <image name="funcsixin" width="37" height="37"/>
-        <image name="zhuanpan" width="36.5" height="36.5"/>
-    </resources>
 </document>

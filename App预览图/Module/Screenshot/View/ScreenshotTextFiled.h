@@ -29,7 +29,7 @@
 @interface ScreenshotTextFiled : UIView
 
 @property (nonatomic, weak) id<ScreenshotTextFieldDelegate> delegate;
-@property (nonatomic, copy, readonly) NSString* text;
+@property (nonatomic, strong) NSString* text;
 @property (nonatomic, readonly) UIImage* textImage;             //生成字幕image
 @property (nonatomic, strong) UILabel* textLabel;                 //文字输入Label
 @property (nonatomic, assign) BOOL isEditing;  //正在编辑

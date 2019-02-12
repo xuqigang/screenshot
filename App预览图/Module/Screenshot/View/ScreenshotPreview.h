@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TemplateParameter.h"
 NS_ASSUME_NONNULL_BEGIN
 @class ScreenshotPreview;
 @protocol ScreenshotPreviewDelegate <NSObject>
@@ -20,8 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<ScreenshotPreviewDelegate> delegate;
 @property (nonatomic, strong) UIImage * _Nullable backgroundImage;
 @property (nonatomic, strong) UIImage * _Nullable shellImage;
+@property (nonatomic, strong) UIImage * _Nullable screenshotImage;
 @property (nonatomic, assign) CGFloat shellTopScale;  //手机壳顶部约束比例
-
+@property (nonatomic, assign) ScreenshotType screenshotType;
 - (void)generateScreenshotImageCallback:(void(^)(UIImage*image))callback;
 
 @end
