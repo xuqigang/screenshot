@@ -215,6 +215,7 @@
 - (void)backgroundFuctionPanelViewDidImageClicked:(BackgroundFuctionPanelView*)functionPanelView{
     
     ZYQAssetPickerController *pickerController = [[ZYQAssetPickerController alloc] init];
+    pickerController.view.tag = 100;
     pickerController.maximumNumberOfSelection = 1;
     pickerController.assetsFilter = ZYQAssetsFilterAllAssets;
     pickerController.showEmptyGroups=NO;
@@ -258,11 +259,21 @@
 
 #pragma mark - ZYQAssetPickerControllerDelegate
 -(void)assetPickerController:(ZYQAssetPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
-    //设置图片背景
-    ZYQAsset *asset=[assets lastObject];
-    [asset setGetFullScreenImage:^(UIImage *result) {
-        [self.screenshotPreview setBackgroundImage:result];
-    }];
+    
+    if (picker.view.tag == 100) {
+        //设置图片背景
+        ZYQAsset *asset=[assets lastObject];
+        [asset setGetFullScreenImage:^(UIImage *result) {
+            [self.screenshotPreview setBackgroundImage:result];
+        }];
+        
+    } else {
+        ZYQAsset *asset=[assets lastObject];
+        [asset setGetFullScreenImage:^(UIImage *result) {
+            [self.screenshotPreview setScreenshotImage:result];
+        }];
+    }
+    
 }
 
 #pragma mark - ScreenshotPreviewDelegate
@@ -270,6 +281,15 @@
     [self.materialArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj setIsEditing:NO];
     }];
+}
+- (void)screenshotImagePreviewDidTap:(ScreenshotPreview*)screenshotPreview{
+    ZYQAssetPickerController *pickerController = [[ZYQAssetPickerController alloc] init];
+    pickerController.view.tag = 101;
+    pickerController.maximumNumberOfSelection = 1;
+    pickerController.assetsFilter = ZYQAssetsFilterAllAssets;
+    pickerController.showEmptyGroups=NO;
+    pickerController.delegate=self;
+    [self presentViewController:pickerController animated:YES completion:nil];
 }
 #pragma mark - 其它
 - (void)modifyTextStyleInScreenshotTextFiled:(ScreenshotTextFiled*)textFiled withTextStyleParameter:(TextStyleParameter*)parameter{

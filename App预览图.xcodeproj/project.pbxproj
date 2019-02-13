@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2497DB80E56D0330B69D3F3E /* libPods-App预览图.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B219D6E92064CFFD58073742 /* libPods-App预览图.a */; };
+		7B0254D12213A91F00A7FB4E /* IMG_0183.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 7B0254D02213A91F00A7FB4E /* IMG_0183.PNG */; };
+		7B0254D32213B3DE00A7FB4E /* userlive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B0254D22213B3DE00A7FB4E /* userlive.png */; };
+		7B0254D52213B55C00A7FB4E /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7B0254D42213B55C00A7FB4E /* test.jpg */; };
 		7B02C33221E109FE00CB7574 /* TextStyleEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B02C33121E109FE00CB7574 /* TextStyleEditView.m */; };
 		7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B02C33321E10A0F00CB7574 /* TextStyleEditView.xib */; };
 		7B230BA321E3410A006F7B5B /* ScreenshotPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B230BA121E3410A006F7B5B /* ScreenshotPreviewVC.m */; };
@@ -21,7 +24,6 @@
 		7B6BBB8221E4A7B8002E1406 /* PasterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6BBB8021E4A7B8002E1406 /* PasterViewCell.xib */; };
 		7B6BBB8521E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6BBB8421E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m */; };
 		7B70E18C21F05818003A3392 /* pasters.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B70E18B21F05818003A3392 /* pasters.json */; };
-		7B88EA21221262B5003C9FB3 /* liveroom.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B88EA20221262B5003C9FB3 /* liveroom.png */; };
 		7B88EA2422126502003C9FB3 /* TextPatameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B88EA2322126502003C9FB3 /* TextPatameter.m */; };
 		7B88EA2722126518003C9FB3 /* PasterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B88EA2622126518003C9FB3 /* PasterParameter.m */; };
 		7B88EA292212CE5D003C9FB3 /* newscreenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B88EA282212CE5C003C9FB3 /* newscreenshot.png */; };
@@ -97,6 +99,9 @@
 /* Begin PBXFileReference section */
 		03168913A83E06CB202C6AD8 /* libPods-App预览图UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-App预览图UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		788EE72CE26152B2ED55AF4D /* Pods-App预览图.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App预览图.release.xcconfig"; path = "Pods/Target Support Files/Pods-App预览图/Pods-App预览图.release.xcconfig"; sourceTree = "<group>"; };
+		7B0254D02213A91F00A7FB4E /* IMG_0183.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_0183.PNG; sourceTree = "<group>"; };
+		7B0254D22213B3DE00A7FB4E /* userlive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userlive.png; sourceTree = "<group>"; };
+		7B0254D42213B55C00A7FB4E /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		7B02C33021E109FE00CB7574 /* TextStyleEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextStyleEditView.h; sourceTree = "<group>"; };
 		7B02C33121E109FE00CB7574 /* TextStyleEditView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextStyleEditView.m; sourceTree = "<group>"; };
 		7B02C33321E10A0F00CB7574 /* TextStyleEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextStyleEditView.xib; sourceTree = "<group>"; };
@@ -117,7 +122,6 @@
 		7B6BBB8321E4AB4E002E1406 /* ILGCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILGCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		7B6BBB8421E4AB4E002E1406 /* ILGCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILGCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		7B70E18B21F05818003A3392 /* pasters.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pasters.json; sourceTree = "<group>"; };
-		7B88EA20221262B5003C9FB3 /* liveroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liveroom.png; sourceTree = "<group>"; };
 		7B88EA2222126502003C9FB3 /* TextPatameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextPatameter.h; sourceTree = "<group>"; };
 		7B88EA2322126502003C9FB3 /* TextPatameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextPatameter.m; sourceTree = "<group>"; };
 		7B88EA2522126518003C9FB3 /* PasterParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasterParameter.h; sourceTree = "<group>"; };
@@ -372,11 +376,13 @@
 				7BF4260B21DD9E5A001920AA /* buzhou01.png */,
 				7BF4260C21DD9E5A001920AA /* buzhou05.png */,
 				7BF4268A21DE1185001920AA /* 1111_03.png */,
+				7B0254D22213B3DE00A7FB4E /* userlive.png */,
 				7BF4260D21DD9E5A001920AA /* buzhou04.png */,
 				7BE9D2A221DEFB0C00C9C3D5 /* 0x0ss-3.jpg */,
-				7B88EA20221262B5003C9FB3 /* liveroom.png */,
 				7B70E18B21F05818003A3392 /* pasters.json */,
 				7B88EA282212CE5C003C9FB3 /* newscreenshot.png */,
+				7B0254D02213A91F00A7FB4E /* IMG_0183.PNG */,
+				7B0254D42213B55C00A7FB4E /* test.jpg */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -690,6 +696,7 @@
 				7BF9EFBB21F1D7A000BEF024 /* TemplateScreenshotVC.xib in Resources */,
 				7BF4268B21DE1185001920AA /* 1111_03.png in Resources */,
 				7BE9D2A121DEEE6F00C9C3D5 /* ScreenshotEditVC.xib in Resources */,
+				7B0254D12213A91F00A7FB4E /* IMG_0183.PNG in Resources */,
 				7BF4265221DD9E5A001920AA /* buzhou04.png in Resources */,
 				7BE9D2AD21DF42FE00C9C3D5 /* ColorSelectedView.xib in Resources */,
 				7BF9EFB421F1AF5000BEF024 /* BackgroundFuctionPanelView.xib in Resources */,
@@ -699,11 +706,12 @@
 				7B02C33421E10A0F00CB7574 /* TextStyleEditView.xib in Resources */,
 				7BF4265121DD9E5A001920AA /* buzhou05.png in Resources */,
 				7BF4264F21DD9E5A001920AA /* buzhou02.png in Resources */,
-				7B88EA21221262B5003C9FB3 /* liveroom.png in Resources */,
 				7B6BBB8221E4A7B8002E1406 /* PasterViewCell.xib in Resources */,
 				7BE9D2A821DEFE3F00C9C3D5 /* ScreenshotMenuView.xib in Resources */,
 				7BB1143421E49AAD007668E1 /* PasterSelectView.xib in Resources */,
+				7B0254D52213B55C00A7FB4E /* test.jpg in Resources */,
 				7BF4264E21DD9E5A001920AA /* buzhou03.png in Resources */,
+				7B0254D32213B3DE00A7FB4E /* userlive.png in Resources */,
 				7B70E18C21F05818003A3392 /* pasters.json in Resources */,
 				7BF4269021DE14DB001920AA /* HomeVC.xib in Resources */,
 			);

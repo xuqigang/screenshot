@@ -27,6 +27,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *opacityLabel;
 @property (weak, nonatomic) IBOutlet UISlider *opacityAdjustSlider;
 @property (weak, nonatomic) IBOutlet UIButton *opacityUpButton;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton;
+@property (weak, nonatomic) IBOutlet UIButton *centerButton;
+@property (weak, nonatomic) IBOutlet UIButton *rightButton;
+@property (weak, nonatomic) IBOutlet UIButton *horizontalButton; //水平
+@property (weak, nonatomic) IBOutlet UIButton *verticalButton; //垂直
 
 @end
 @implementation TextStyleEditView
@@ -49,7 +54,15 @@
     effectView.tag = 1001;
     [self.contentView insertSubview:effectView atIndex:0];
     [self initTextStyleParameter];
-    
+    [self initUI];
+}
+- (void)initUI{
+    [self initButton:self.overstrikingButton withDefaultText:@"fa-square-o" selectedText:@"fa-check-square-o"];
+    [self initButton:self.leftButton withDefaultText:@"fa-circle-o" selectedText:@"fa-dot-circle-o"];
+    [self initButton:self.centerButton withDefaultText:@"fa-circle-o" selectedText:@"fa-dot-circle-o"];
+    [self initButton:self.rightButton withDefaultText:@"fa-circle-o" selectedText:@"fa-dot-circle-o"];
+    [self initButton:self.horizontalButton withDefaultText:@"fa-square-o" selectedText:@"fa-check-square-o"];
+    [self initButton:self.verticalButton withDefaultText:@"fa-square-o" selectedText:@"fa-check-square-o"];
 }
 - (void)initTextStyleParameter{
     _textStyleParameter = [[TextStyleParameter alloc] init];
@@ -65,6 +78,16 @@
     _textStyleParameter.vertical = NO;
     _textStyleParameter.opacity = 1;
 }
+- (void)initButton:(UIButton*)button withDefaultText:(NSString*)defaultText selectedText:(NSString*)selectedText{
+    UIFont *font = [UIFont fontAwesomeFontOfSize:16];
+    NSString *defaultString = [NSString fontAwesomeIconStringForIconIdentifier:defaultText];
+    NSString *selectedString = [NSString fontAwesomeIconStringForIconIdentifier:selectedText];
+    button.titleLabel.font = font;
+    [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [button setTitle:defaultString forState:UIControlStateNormal];
+    [button setTitle:selectedString forState:UIControlStateSelected];
+}
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     UIView *effectView = [self.contentView viewWithTag:1001];

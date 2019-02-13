@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ScreenshotPreviewDelegate <NSObject>
 
 - (void)screenshotPreviewEndEdited:(ScreenshotPreview*)screenshotPreview;
+- (void)screenshotImagePreviewDidTap:(ScreenshotPreview*)screenshotPreview;
 
 @end
 @interface ScreenshotPreview : UIView

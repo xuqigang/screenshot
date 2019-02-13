@@ -25,6 +25,9 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     self.screenshotType = ScreenshotType_Plus;
+    UITapGestureRecognizer *screenshotTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenshotImageViewTap:)];
+    [self.screenshotImageView addGestureRecognizer:screenshotTap];
+    self.screenshotImageView.userInteractionEnabled = YES;
 }
 - (void)setBackgroundImage:(UIImage *)backgroundImage{
     self.backgroundImageView.image = backgroundImage;
@@ -47,6 +50,9 @@
 }
 - (void)setScreenshotType:(ScreenshotType)screenshotType{
     _screenshotType = screenshotType;
+    if (_screenshotType == ScreenshotType_X) {
+        [self bringSubviewToFront:self.shellImageView];
+    }
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -110,6 +116,11 @@
         return view;
     }
     
+}
+- (void)screenshotImageViewTap:(UIGestureRecognizer*)ges{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(screenshotImagePreviewDidTap:)]) {
+        [self.delegate screenshotImagePreviewDidTap:self];
+    }
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
 

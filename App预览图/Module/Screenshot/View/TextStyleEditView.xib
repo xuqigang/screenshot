@@ -248,7 +248,13 @@
                                         <constraint firstAttribute="width" constant="30" id="26s-r9-tol"/>
                                         <constraint firstAttribute="height" constant="30" id="Cn9-ll-Ubp"/>
                                     </constraints>
-                                    <state key="normal" title="左"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="左">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="alignmentButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="oF1-mO-eoO"/>
                                     </connections>
@@ -259,7 +265,13 @@
                                         <constraint firstAttribute="width" constant="30" id="QCh-nH-4QY"/>
                                         <constraint firstAttribute="height" constant="30" id="zbd-L2-A6j"/>
                                     </constraints>
-                                    <state key="normal" title="左"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="左">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="alignmentButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="ONF-xK-mRH"/>
                                     </connections>
@@ -270,7 +282,13 @@
                                         <constraint firstAttribute="width" constant="30" id="TQv-Is-AGt"/>
                                         <constraint firstAttribute="height" constant="30" id="xIk-Q8-gig"/>
                                     </constraints>
-                                    <state key="normal" title="左"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="左">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="alignmentButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="YCi-gQ-EDZ"/>
                                     </connections>
@@ -299,8 +317,12 @@
                                         <constraint firstAttribute="width" constant="30" id="OKR-l3-pj3"/>
                                         <constraint firstAttribute="height" constant="30" id="ge0-wj-zun"/>
                                     </constraints>
-                                    <state key="normal" title="口">
-                                        <color key="titleColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
                                         <action selector="overstrikingButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="inL-lt-Zw6"/>
@@ -350,7 +372,13 @@
                                         <constraint firstAttribute="width" constant="30" id="hVw-tr-nf3"/>
                                         <constraint firstAttribute="height" constant="30" id="svZ-4e-x0m"/>
                                     </constraints>
-                                    <state key="normal" title="--"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="rotateResetButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="UWN-cw-1Ln"/>
                                     </connections>
@@ -367,7 +395,13 @@
                                         <constraint firstAttribute="height" constant="30" id="JW8-WB-ekY"/>
                                         <constraint firstAttribute="width" constant="30" id="eaA-dd-VG5"/>
                                     </constraints>
-                                    <state key="normal" title="--"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="rotateResetButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Q3y-0w-Wu4"/>
                                     </connections>
@@ -549,20 +583,25 @@
             </constraints>
             <connections>
                 <outlet property="backgroundColorShowView" destination="wQC-cw-llS" id="lHU-sk-KGh"/>
+                <outlet property="centerButton" destination="Pif-xx-EsM" id="vqC-m7-OFy"/>
                 <outlet property="contentView" destination="YpS-7O-vbf" id="QZC-Jg-5vi"/>
                 <outlet property="fontSizeAdjustSlider" destination="HxK-q3-W4n" id="OTC-rh-Xow"/>
                 <outlet property="fontSizeLabel" destination="jbm-ko-oVa" id="nlg-NX-IRc"/>
                 <outlet property="fontSizeUpButton" destination="0Ph-OO-uwV" id="Ya9-s7-Egz"/>
+                <outlet property="horizontalButton" destination="IDj-8q-2kX" id="fMA-fi-RLx"/>
+                <outlet property="leftButton" destination="Dsv-Vo-LXH" id="WyN-Uc-Pwr"/>
                 <outlet property="opacityAdjustSlider" destination="WNT-Kc-ks6" id="9kc-Rj-yOq"/>
                 <outlet property="opacityLabel" destination="HBH-Nz-7ji" id="vvH-xl-rJR"/>
                 <outlet property="opacityUpButton" destination="dvB-Rn-0zs" id="7XM-8B-obM"/>
                 <outlet property="overstrikingButton" destination="IWy-s1-so1" id="oh8-SX-Ify"/>
+                <outlet property="rightButton" destination="WLX-1B-maF" id="6yU-te-v4r"/>
                 <outlet property="shadowColorShowView" destination="gua-Wc-HiQ" id="L6k-SA-rOz"/>
                 <outlet property="shadowHeightTextField" destination="hxS-cv-LSJ" id="2Eh-h4-rCK"/>
                 <outlet property="shadowWidthTextField" destination="xv1-UV-GX0" id="MiS-x1-j9d"/>
                 <outlet property="textColorShowView" destination="aHs-7j-uB1" id="4Ka-Q4-dmi"/>
+                <outlet property="verticalButton" destination="fc3-Ag-loY" id="gAt-QV-IIm"/>
             </connections>
-            <point key="canvasLocation" x="52.5" y="80"/>
+            <point key="canvasLocation" x="52.5" y="79.225352112676063"/>
         </view>
     </objects>
 </document>

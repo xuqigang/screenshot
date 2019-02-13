@@ -27,6 +27,5 @@
         self.previewImageView.backgroundColor = UIColorFromRGB(0x007AFF);
         self.previewImageView.image = nil;
     }
-    self.previewImageView.backgroundColor = UIColorFromRGB(0x007AFF);
 }
 @end
