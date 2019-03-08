@@ -317,7 +317,6 @@
     
     _isInputting = NO;
     [_inputTextView resignFirstResponder];
-    
 }
 
 - (void)changeFirstResponder

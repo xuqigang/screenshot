@@ -11,8 +11,12 @@
 #import "XMBaseNC.h"
 #import "UIColor+utils.h"
 #import "QGDBManager.h"
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 @interface AppDelegate ()
-
+{
+    CTTelephonyNetworkInfo *networkInfo;
+}
 @end
 
 @implementation AppDelegate
@@ -31,6 +35,8 @@
     self.window.rootViewController = nv;
     [self.window makeKeyAndVisible];
     
+    networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = networkInfo.subscriberCellularProvider;
     return YES;
 }
 

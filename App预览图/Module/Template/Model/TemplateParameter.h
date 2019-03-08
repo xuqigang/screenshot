@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger,ScreenshotType){
 
 @property (nonatomic, assign) ScreenshotType screenshotType;
 @property (nonatomic, strong) NSString * _Nullable previewIcon;
+@property (nonatomic, strong) NSString * _Nullable title;
 @property (nonatomic, assign) CGFloat shellTopScale;  //手机壳的位置比例
 @property (nonatomic, assign) CGFloat screenshotScale; //屏幕快照宽高比
 @property (nonatomic, strong) NSString * shellImage;  //手机壳对应的图片

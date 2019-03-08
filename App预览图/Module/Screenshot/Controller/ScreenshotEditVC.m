@@ -17,6 +17,7 @@
 #import "ZYQAssetPickerController.h"
 #import "ScreenshotPreviewVC.h"
 #import "BackgroundFuctionPanelView.h"
+#import <ZipArchive.h>
 @interface ScreenshotEditVC ()<ScreenshotMenuViewDelegate,ScreenshotTextFieldDelegate,ScreenshotPreviewDelegate,ScreenshotPasterViewDelegate, ZYQAssetPickerControllerDelegate,UINavigationControllerDelegate,BackgroundFuctionPanelViewDelegate>
 @property (nonatomic, strong) NSMutableArray *materialArray;
 @property (nonatomic, strong) ScreenshotPreview *screenshotPreview;
@@ -40,14 +41,13 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (void)setupUI{
-    self.navigationItem.title = @"设计快照";
+    self.navigationItem.title = @"美化";
     [self setRightButtonText:@"保存"];
     [self setRightSecondButtonText:@"预览"];
     [self.view addSubview:self.screenshotPreview];
     [self.view addSubview:self.screenshotMenuView];
 }
 - (void)setupScreenshotParameter{
-    self.screenshotPreview.backgroundImage = [UIImage imageNamed:self.templateParameter.backgroundImage];
     self.screenshotPreview.backgroundColor = self.templateParameter.backgroundColor;
     self.screenshotPreview.shellImage = [UIImage imageNamed:self.templateParameter.shellImage];
     self.screenshotPreview.screenshotImage = self.templateParameter.screenshotImage;
@@ -176,11 +176,12 @@
 - (void)screenshotMenuViewShare:(ScreenshotMenuView*)screenshotMenuView{
     [self.screenshotPreview generateScreenshotImageCallback:^(UIImage * _Nonnull image) {
         
+        NSData *imageData = UIImagePNGRepresentation(image);
         //在这里呢 如果想分享图片 就把图片添加进去  文字什么的通上
-        NSArray *activityItems = @[image];
+        NSArray *activityItems = @[imageData];
         UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
         //不出现在活动项目
-        activityVC.excludedActivityTypes = @[UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
+        activityVC.excludedActivityTypes = @[UIActivityTypePrint,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
         [self presentViewController:activityVC animated:YES completion:nil];
         // 分享之后的回调
         activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {

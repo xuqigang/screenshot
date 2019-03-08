@@ -24,7 +24,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEz-nk-AtV">
                     <rect key="frame" x="16" y="18" width="4" height="22"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.58823529411764708" green="0.83529411764705885" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="ZEz-nk-AtV" secondAttribute="height" multiplier="25:130" id="QOW-D7-uXB"/>
                     </constraints>
@@ -61,7 +61,7 @@
             <connections>
                 <outlet property="titleLabel" destination="qub-VW-2DM" id="Hts-wR-Eah"/>
             </connections>
-            <point key="canvasLocation" x="137.59999999999999" y="135.832083958021"/>
+            <point key="canvasLocation" x="30" y="136"/>
         </collectionReusableView>
     </objects>
 </document>

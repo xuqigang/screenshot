@@ -85,22 +85,33 @@
         [self.layer renderInContext:ctx];
         UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
+        CGFloat width;
+        CGFloat height;
         switch (self.screenshotType) {
             case ScreenshotType_Plus:
-                UIGraphicsBeginImageContextWithOptions(CGSizeMake(1242/UIScreen.mainScreen.scale, 2208/UIScreen.mainScreen.scale), NO, 0.0);
-                [image drawInRect:CGRectMake(0, 0, 1242/UIScreen.mainScreen.scale, 2208/UIScreen.mainScreen.scale)];
+            {
+                width = 1242.0/UIScreen.mainScreen.scale;
+                height = 2208.0/UIScreen.mainScreen.scale;
+            }
+                
                 break;
             case ScreenshotType_X:
-                UIGraphicsBeginImageContextWithOptions(CGSizeMake(1125/UIScreen.mainScreen.scale, 2436/UIScreen.mainScreen.scale), NO, 0.0);
-                [image drawInRect:CGRectMake(0, 0, 1125/UIScreen.mainScreen.scale, 2436/UIScreen.mainScreen.scale)];
+            {
+                width = 1242.0/UIScreen.mainScreen.scale;
+                height = 2688.0/UIScreen.mainScreen.scale;
+            }
                 break;
             default:
+                width = 1242;
+                height = 2208;
                 break;
         }
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0.0);
+        [image drawInRect:CGRectMake(0, 0, width, height)];
         UIImage* targetImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         if (callback) {
-            callback(targetImage);
+            callback([UIImage imageWithData:UIImagePNGRepresentation(targetImage)]);
         }
     });
 }

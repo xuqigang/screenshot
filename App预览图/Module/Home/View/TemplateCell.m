@@ -9,6 +9,7 @@
 #import "TemplateCell.h"
 @interface TemplateCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *previewImageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
 
@@ -21,11 +22,14 @@
 - (void)setupCellData:(TemplateParameter*)data{
     
     if (data) {
-        self.previewImageView.backgroundColor = [UIColor clearColor];
-        self.previewImageView.image = [UIImage imageNamed:data.previewIcon];
+        self.titleLabel.text = data.title;
+        self.previewImageView.backgroundColor = UIColorFromRGB(0xf2f2f2);
+//        self.previewImageView.backgroundColor = [UIColor clearColor];
+//        self.previewImageView.image = [UIImage imageNamed:data.previewIcon];
     } else {
         self.previewImageView.backgroundColor = UIColorFromRGB(0x007AFF);
         self.previewImageView.image = nil;
+        self.titleLabel.text = @"";
     }
 }
 @end

@@ -32,4 +32,3 @@
 #import "NSMutableAttributedString+FontAwesome.h"
 #import "AppConfig.h"
 #import "SVProgressHUD.h"
-
