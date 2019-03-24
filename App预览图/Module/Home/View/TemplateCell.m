@@ -22,10 +22,10 @@
 - (void)setupCellData:(TemplateParameter*)data{
     
     if (data) {
-        self.titleLabel.text = data.title;
+//        self.titleLabel.text = data.title;
         self.previewImageView.backgroundColor = UIColorFromRGB(0xf2f2f2);
-//        self.previewImageView.backgroundColor = [UIColor clearColor];
-//        self.previewImageView.image = [UIImage imageNamed:data.previewIcon];
+        self.previewImageView.backgroundColor = [UIColor clearColor];
+        self.previewImageView.image = [UIImage imageNamed:data.previewIcon];
     } else {
         self.previewImageView.backgroundColor = UIColorFromRGB(0x007AFF);
         self.previewImageView.image = nil;

@@ -16,7 +16,7 @@
 #define PopViewController [self.navigationController popViewControllerAnimated:YES]
 #define PopToRootViewController [self.navigationController popToRootViewControllerAnimated:YES]
 #define PopToViewController(x) [self popToViewController:x]
-#define ThemeColor [UIColor colorWithRed:150/255.0 green:213/255.0 blue:90/255.0 alpha:1]
+#define ThemeColor [UIColor greenColor]
 #define QGFont(x) [UIFont systemFontOfSize:x]
 #define StatusBarHeight CGRectGetHeight([UIApplication sharedApplication].statusBarFrame)
 

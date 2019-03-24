@@ -18,7 +18,7 @@
 #import "ScreenshotPreviewVC.h"
 #import "BackgroundFuctionPanelView.h"
 #import <ZipArchive.h>
-@interface ScreenshotEditVC ()<ScreenshotMenuViewDelegate,ScreenshotTextFieldDelegate,ScreenshotPreviewDelegate,ScreenshotPasterViewDelegate, ZYQAssetPickerControllerDelegate,UINavigationControllerDelegate,BackgroundFuctionPanelViewDelegate>
+@interface ScreenshotEditVC ()<ScreenshotMenuViewDelegate,ScreenshotTextFieldDelegate,ScreenshotPreviewDelegate,ScreenshotPasterViewDelegate, ZYQAssetPickerControllerDelegate,UINavigationControllerDelegate,BackgroundFuctionPanelViewDelegate,ScreenshotMenuViewDelegate>
 @property (nonatomic, strong) NSMutableArray *materialArray;
 @property (nonatomic, strong) ScreenshotPreview *screenshotPreview;
 @property (nonatomic, strong) ScreenshotMenuView *screenshotMenuView;
@@ -41,8 +41,8 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (void)setupUI{
-    self.navigationItem.title = @"美化";
-    [self setRightButtonText:@"保存"];
+    self.navigationItem.title = @"Snapshot Wrapper";
+    [self setRightButtonText:@"Save"];
     [self setRightSecondButtonText:@"预览"];
     [self.view addSubview:self.screenshotPreview];
     [self.view addSubview:self.screenshotMenuView];
@@ -67,7 +67,7 @@
 //        [textField setIsEditing:NO];
 //        [self.materialArray addObject:textField];
 //    }];
-//    
+//
     
 }
 - (void)viewDidLayoutSubviews{
