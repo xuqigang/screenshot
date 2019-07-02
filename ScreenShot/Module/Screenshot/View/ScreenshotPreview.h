@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TemplateParameter.h"
+#import "XHTemplateParameter.h"
 NS_ASSUME_NONNULL_BEGIN
 @class ScreenshotPreview;
 @protocol ScreenshotPreviewDelegate <NSObject>

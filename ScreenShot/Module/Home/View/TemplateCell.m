@@ -19,7 +19,7 @@
     [super awakeFromNib];
     // Initialization code
 }
-- (void)setupCellData:(TemplateParameter*)data{
+- (void)setupCellData:(XHTemplateParameter*)data{
     
     if (data) {
 //        self.titleLabel.text = data.title;

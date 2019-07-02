@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "ScreenshotPasterView.h"
+#import "XHScreenshotPasterView.h"
 @interface ViewController ()
 
 @end

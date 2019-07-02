@@ -7,7 +7,7 @@
 //
 
 #import "ScreenshotPreview.h"
-#import "ScreenshotTextFiled.h"
+#import "XHScreenshotTextFiled.h"
 #import "UIView+Additions.h"
 @interface ScreenshotPreview ()
 

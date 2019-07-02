@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TemplateParameter.h"
+#import "XHTemplateParameter.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TemplateCell : UICollectionViewCell
 
-- (void)setupCellData:(TemplateParameter *_Nullable )data;
+- (void)setupCellData:(XHTemplateParameter *_Nullable )data;
 
 @end
 

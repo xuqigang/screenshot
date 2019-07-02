@@ -515,11 +515,11 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 - (void)updateMotionEffectForOrientation:(UIInterfaceOrientation)orientation {
     UIInterpolatingMotionEffectType xMotionEffectType = UIInterfaceOrientationIsPortrait(orientation) ? UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis : UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis;
     UIInterpolatingMotionEffectType yMotionEffectType = UIInterfaceOrientationIsPortrait(orientation) ? UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis : UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis;
-    [self updateMotionEffectForXMotionEffectType:xMotionEffectType yMotionEffectType:yMotionEffectType];
+    [self updateMotionEffectForXHotionEffectType:xMotionEffectType yMotionEffectType:yMotionEffectType];
 }
 #endif
 
-- (void)updateMotionEffectForXMotionEffectType:(UIInterpolatingMotionEffectType)xMotionEffectType yMotionEffectType:(UIInterpolatingMotionEffectType)yMotionEffectType {
+- (void)updateMotionEffectForXHotionEffectType:(UIInterpolatingMotionEffectType)xMotionEffectType yMotionEffectType:(UIInterpolatingMotionEffectType)yMotionEffectType {
     UIInterpolatingMotionEffect *effectX = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:xMotionEffectType];
     effectX.minimumRelativeValue = @(-SVProgressHUDParallaxDepthPoints);
     effectX.maximumRelativeValue = @(SVProgressHUDParallaxDepthPoints);
@@ -682,7 +682,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     // Update the motion effects in regard to orientation
     [self updateMotionEffectForOrientation:orientation];
 #else
-    [self updateMotionEffectForXMotionEffectType:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis yMotionEffectType:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    [self updateMotionEffectForXHotionEffectType:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis yMotionEffectType:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
 #endif
     
     // Calculate available height for display

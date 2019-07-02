@@ -608,7 +608,7 @@ static int FMDBDatabaseBusyHandler(void *f, int count) {
         sqlite3_bind_null(pStmt, idx);
     }
     
-    // FIXME - someday check the return codes on these binds.
+    // FIXHE - someday check the return codes on these binds.
     else if ([obj isKindOfClass:[NSData class]]) {
         const void *bytes = [obj bytes];
         if (!bytes) {

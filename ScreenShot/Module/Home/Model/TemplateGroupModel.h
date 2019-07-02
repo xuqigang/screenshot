@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TemplateParameter.h"
+#import "XHTemplateParameter.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TemplateGroupModel : NSObject
 
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSArray<TemplateParameter*> *list;
+@property (nonatomic, strong) NSArray<XHTemplateParameter*> *list;
 
 @end
 
