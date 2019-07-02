@@ -3,11 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2497DB80E56D0330B69D3F3E /* libPods-App预览图.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B219D6E92064CFFD58073742 /* libPods-App预览图.a */; };
+		77C63A183A5CE41D08E1315C /* libPods-ScreenShot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7B344A979D46A6013B091E /* libPods-ScreenShot.a */; };
 		7B0254D52213B55C00A7FB4E /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7B0254D42213B55C00A7FB4E /* test.jpg */; };
 		7B02C33221E109FE00CB7574 /* XHTextStyleEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B02C33121E109FE00CB7574 /* XHTextStyleEditView.m */; };
 		7B02C33421E10A0F00CB7574 /* XHTextStyleEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B02C33321E10A0F00CB7574 /* XHTextStyleEditView.xib */; };
@@ -90,6 +90,7 @@
 
 /* Begin PBXFileReference section */
 		03168913A83E06CB202C6AD8 /* libPods-App预览图UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-App预览图UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F7B344A979D46A6013B091E /* libPods-ScreenShot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScreenShot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		788EE72CE26152B2ED55AF4D /* Pods-App预览图.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App预览图.release.xcconfig"; path = "Pods/Target Support Files/Pods-App预览图/Pods-App预览图.release.xcconfig"; sourceTree = "<group>"; };
 		7B0254D42213B55C00A7FB4E /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		7B02C33021E109FE00CB7574 /* XHTextStyleEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHTextStyleEditView.h; sourceTree = "<group>"; };
@@ -212,7 +213,8 @@
 		7BF9EFBD21F1D7F500BEF024 /* XHTemplateParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHTemplateParameter.h; sourceTree = "<group>"; };
 		7BF9EFBE21F1D7F500BEF024 /* XHTemplateParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHTemplateParameter.m; sourceTree = "<group>"; };
 		AC48AE4E212F8CC70259B38A /* Pods-App预览图.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App预览图.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App预览图/Pods-App预览图.debug.xcconfig"; sourceTree = "<group>"; };
-		B219D6E92064CFFD58073742 /* libPods-App预览图.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-App预览图.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E27D439BE24A54FEC08C61FE /* Pods-ScreenShot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScreenShot/Pods-ScreenShot.debug.xcconfig"; sourceTree = "<group>"; };
+		E3A8726231B7495DD92B4AA5 /* Pods-ScreenShot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShot.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScreenShot/Pods-ScreenShot.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,7 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B85279F222CBB64008AC4D5 /* CoreTelephony.framework in Frameworks */,
-				2497DB80E56D0330B69D3F3E /* libPods-App预览图.a in Frameworks */,
+				77C63A183A5CE41D08E1315C /* libPods-ScreenShot.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,8 +241,8 @@
 			isa = PBXGroup;
 			children = (
 				7B85279E222CBB63008AC4D5 /* CoreTelephony.framework */,
-				B219D6E92064CFFD58073742 /* libPods-App预览图.a */,
 				03168913A83E06CB202C6AD8 /* libPods-App预览图UITests.a */,
+				5F7B344A979D46A6013B091E /* libPods-ScreenShot.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -250,6 +252,8 @@
 			children = (
 				AC48AE4E212F8CC70259B38A /* Pods-App预览图.debug.xcconfig */,
 				788EE72CE26152B2ED55AF4D /* Pods-App预览图.release.xcconfig */,
+				E27D439BE24A54FEC08C61FE /* Pods-ScreenShot.debug.xcconfig */,
+				E3A8726231B7495DD92B4AA5 /* Pods-ScreenShot.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -258,7 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				7BF425A721DD9DD7001920AA /* ScreenShot */,
-				7BF425C021DD9DD9001920AA /* App预览图UITests */,
+				7BF425C021DD9DD9001920AA /* ScreenShotUITests */,
 				7BF425A621DD9DD7001920AA /* Products */,
 				75FE36D33AB51850CC8F8001 /* Pods */,
 				3683D30DF7968B79DD888CFC /* Frameworks */,
@@ -300,13 +304,13 @@
 			path = ScreenShot;
 			sourceTree = "<group>";
 		};
-		7BF425C021DD9DD9001920AA /* App预览图UITests */ = {
+		7BF425C021DD9DD9001920AA /* ScreenShotUITests */ = {
 			isa = PBXGroup;
 			children = (
 				7BF425C121DD9DD9001920AA /* App___UITests.m */,
 				7BF425C321DD9DD9001920AA /* Info.plist */,
 			);
-			path = "App预览图UITests";
+			path = ScreenShotUITests;
 			sourceTree = "<group>";
 		};
 		7BF425CC21DD9E59001920AA /* BaseClass */ = {
@@ -701,24 +705,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-App预览图/Pods-App预览图-resources.sh",
-				"${PODS_ROOT}/FontAwesome/Resources/FontAwesome.ttf",
-				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_ROOT}/ZYQAssetPickerController/ZYQAssetPickerController/ZYQAssetPicker.Bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-ScreenShot/Pods-ScreenShot-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZYQAssetPicker.Bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-ScreenShot/Pods-ScreenShot-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-App预览图/Pods-App预览图-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScreenShot/Pods-ScreenShot-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DB52877E514D757936066C4D /* [CP] Check Pods Manifest.lock */ = {
@@ -736,7 +731,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-App预览图-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ScreenShot-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -952,7 +947,7 @@
 		};
 		7BF425C721DD9DD9001920AA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC48AE4E212F8CC70259B38A /* Pods-App预览图.debug.xcconfig */;
+			baseConfigurationReference = E27D439BE24A54FEC08C61FE /* Pods-ScreenShot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -975,7 +970,7 @@
 		};
 		7BF425C821DD9DD9001920AA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 788EE72CE26152B2ED55AF4D /* Pods-App预览图.release.xcconfig */;
+			baseConfigurationReference = E3A8726231B7495DD92B4AA5 /* Pods-ScreenShot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
